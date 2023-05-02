@@ -15,4 +15,5 @@ pluginManagement {
 // include("hw01-helloWorld")
 include(
     "api-kmp",         // сериализация транстпортных моделей
+    "common",          // внутрянка (внутренние модели, хелперы, etc.)
     )
