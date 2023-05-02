@@ -437,13 +437,11 @@ components:
               $ref: '#/components/schemas/ObjListTagsObject'
 
     ObjSetTagsObject:
-      allOf:
-        - type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/ObjId'
-        - type: array
-          uniqueItems: true
+      properties:
+        id:
+          $ref: '#/components/schemas/ObjId'
+        tags:
+          type: array
           items:
             $ref: '#/components/schemas/TagCode'
     ObjSetTagsRequest:
@@ -492,6 +490,7 @@ components:
           properties:
             id:
               $ref: '#/components/schemas/TagId'
+
     TagListObjsRequest:
       allOf:
         - $ref: '#/components/schemas/IRequest'

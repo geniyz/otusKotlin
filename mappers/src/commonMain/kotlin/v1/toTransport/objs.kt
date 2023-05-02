@@ -61,7 +61,7 @@ fun AppContext.toTransportObjSetTags() = ObjSetTagsResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
     result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
     errors = errors.toTransportErrors(),
-    obj = objResponse.toTransport(),
+    obj  = objResponse.toTransport(),
     tags = tagsResponse.toTransport(),
 )
 
@@ -83,8 +83,8 @@ private fun AppObj.toTransport(): ObjResponseObject = ObjResponseObject(
     objType = objType.toTransport(),
     id = id.takeIf { it != AppObjId.NONE }?.asString(),
     authorId = authorId.takeIf { it != AppUserId.NONE }?.asString(),
-    createdAt = createdAt.takeIf { it != Instant.NONE }?.toString(), // TODO: написать соответствующий asString()
-    updatedAt = updatedAt.takeIf { it != Instant.NONE }?.toString(), // TODO: написать соответствующий asString()
+    createdAt = createdAt.takeIf { it != Instant.NONE }?.asString(),
+    updatedAt = updatedAt.takeIf { it != Instant.NONE }?.asString(),
 )
 
 private fun AppObjType.toTransport(): ObjType? = when (this) {

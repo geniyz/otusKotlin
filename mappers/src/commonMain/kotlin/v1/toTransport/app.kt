@@ -4,6 +4,7 @@ import site.geniyz.otus.api.v1.models.*
 import site.geniyz.otus.common.AppContext
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.mappers.v1.exceptions.UnknownAppCommand
+import kotlinx.datetime.Instant
 
 fun AppContext.toTransport(): IResponse = when (val cmd = command) {
     AppCommand.OBJ_CREATE    -> toTransportObjCreate()
@@ -33,3 +34,5 @@ fun AppError.toTransport() = Error(
     field   = field.takeIf { it.isNotBlank() },
     message = message.takeIf { it.isNotBlank() },
 )
+
+fun Instant.asString()= toString()

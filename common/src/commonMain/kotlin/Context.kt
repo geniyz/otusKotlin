@@ -16,13 +16,14 @@ data class AppContext(
     var requestId: AppRequestId = AppRequestId.NONE,
     var timeStart: Instant      = Instant.NONE,
 
-    var objRequest:       AppObj              = AppObj(),
-    var objFilterRequest: AppObjFilter        = AppObjFilter(),
-    var objResponse:      AppObj              = AppObj(),
-    var objsResponse:     MutableList<AppObj> = mutableListOf(),
+    var objRequest:       AppObj              = AppObj(),         // запрос - объект
+    var objFilterRequest: AppObjFilter        = AppObjFilter(),   // поисковый запрос при фильтрации объектов
+    var objResponse:      AppObj              = AppObj(),         // ответ - объект
+    var objsResponse:     MutableList<AppObj> = mutableListOf(),  // ответ - набор объектов
 
-    var tagRequest:       AppTag              = AppTag(),
-    var tagFilterRequest: AppTagFilter        = AppTagFilter(),
-    var tagResponse:      AppTag              = AppTag(),
-    var tagsResponse:     MutableList<AppTag> = mutableListOf(),
+    var tagRequest:       AppTag              = AppTag(),          // запрос - метка
+    var tagsRequest:      MutableList<AppTag> = mutableListOf(),   // запрос - набор меток (при назначении меток объекту, например)
+    var tagFilterRequest: AppTagFilter        = AppTagFilter(),    // поисковый запрос при фильтрации меток
+    var tagResponse:      AppTag              = AppTag(),          // ответ - метка
+    var tagsResponse:     MutableList<AppTag> = mutableListOf(),   // ответ - набор меток
 )
