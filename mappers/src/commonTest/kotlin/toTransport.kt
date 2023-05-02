@@ -63,7 +63,7 @@ class ToTransportTest {
 
         val req = context.toTransport() as ObjListTagsResponse
 
-        assertEquals(0, req.errors?.size)
+        assertEquals(0, req.errors?.size ?: 0)
 
         assertEquals(context.requestId.asString(), req.requestId)
         assertEquals(context.objResponse.name, req.obj?.name)

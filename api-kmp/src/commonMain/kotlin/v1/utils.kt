@@ -1,8 +1,4 @@
-@file:OptIn(ExperimentalSerializationApi::class,
-    InternalSerializationApi::class,
-    InternalSerializationApi::class,
-    InternalSerializationApi::class
-)
+@file:OptIn(ExperimentalSerializationApi::class, InternalSerializationApi::class)
 
 package site.geniyz.otus.api.v1
 

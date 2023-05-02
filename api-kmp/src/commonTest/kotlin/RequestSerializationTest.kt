@@ -26,8 +26,7 @@ class RequestSerializationTest {
     @Test
     fun serialize() {
         val json = apiV1Mapper.encodeToString(request)
-
-        println(json)
+        // println(json)
 
         assertContains(json, Regex("\"name\":\\s*\"Test title\""))
         assertContains(json, Regex("\"mode\":\\s*\"stub\""))
@@ -38,8 +37,7 @@ class RequestSerializationTest {
     @Test
     fun serializeWithoutType() {
         val json = apiV1Mapper.encodeToString((request as ObjCreateRequest).copy(requestType = null) as IRequest)
-
-        println(json)
+        // println(json)
 
         assertContains(json, Regex("\"name\":\\s*\"Test title\""))
         assertContains(json, Regex("\"mode\":\\s*\"stub\""))

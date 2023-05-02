@@ -42,7 +42,6 @@ class ResponseSerializationTest {
     @Test
     fun serializeObjCreateResp() {
         val json = apiV1Mapper.encodeToString(objCreateResp)
-
         // println(json)
 
         assertContains(json, Regex("\"name\":\\s*\"Test Title\""))
@@ -63,7 +62,7 @@ class ResponseSerializationTest {
              "responseType": "objCreate"
             ,"requestId":    "1234"
             ,"result":        null
-            ,"errors":        []
+            ,"errors":        null
             ,"obj": {
                  "name":     "Test Title"
                 ,"content":  "Test content"
@@ -80,12 +79,11 @@ class ResponseSerializationTest {
     @Test
     fun serializeObjListTagsResp() {
         val json = apiV1Mapper.encodeToString(objListTagsResp)
-
-        println(json)
+        // println(json)
 
         assertContains(json, Regex("\"name\":\\s*\"Test Title\""))
         assertContains(json, Regex("\"responseType\":\\s*\"objListTags\""))
-        assertContains(json, Regex(""""tags":\s*\[\s*"name":\s*"tagNameFirst""""))
+        assertContains(json, Regex(""""tags"\s*:\s*\[\s*\{\s*"name":\s*"tagNameFirst""""))
     }
 
     @Test
@@ -102,7 +100,7 @@ class ResponseSerializationTest {
                 {"responseType": "objListTags"
                 ,"requestId":    "5678"
                 ,"result":        null
-                ,"errors":        []
+                ,"errors":        null
                 ,"obj": {
                      "name":    "Test Title"
                     ,"content": "Test content"
@@ -117,7 +115,7 @@ class ResponseSerializationTest {
         ) as IResponse
 
         assertEquals("5678", obj.requestId)
-        assertEquals(objCreateResp, obj)
+        assertEquals(objListTagsResp, obj)
     }
 
 }
