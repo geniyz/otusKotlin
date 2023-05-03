@@ -55,4 +55,31 @@ class FromTransportTest {
         assertEquals(req.obj?.id, context.objRequest.id.asString())
     }
 
+
+    @Test
+    fun objSetTagsTest() {
+        val req = ObjSetTagsRequest(
+            requestId = "9012",
+            debug = ObjDebug(
+                mode = RequestDebugMode.STUB,
+                stub = ObjRequestDebugStubs.SUCCESS,
+            ),
+            obj = ObjSetTagsObject(
+                id = "IDOBJ",
+                tags = listOf("tag1","tag2","tag3")
+            ),
+        )
+
+        val context = AppContext()
+        context.fromTransport(req)
+
+        assertEquals(AppStubs.SUCCESS, context.stubCase)
+        assertEquals(AppWorkMode.STUB, context.workMode)
+        assertEquals(req.obj?.id, context.objRequest.id.asString())
+        assertEquals(req.obj?.tags?.size ?: 0, context.tagsRequest.size)
+
+        assertEquals(req.obj?.tags?.sorted()?.joinToString(","), context.tagsRequest.map{ it.code }.sorted().joinToString(","))
+
+    }
+
 }
