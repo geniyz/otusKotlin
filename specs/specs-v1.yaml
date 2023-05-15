@@ -1,0 +1,693 @@
+openapi: 3.0.1
+info:
+  title: "Tags ${VERSION_APP}"
+  description: Инструментарий назначения меток различным сущностям
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost/v1
+tags:
+  - name: obj
+    description: Сущность, объект
+  - name: tag
+    description: Метка, тэг
+paths:
+  /obj/create:
+    post:
+      tags:
+        - obj
+      summary: Создание сущности
+      operationId: objCreate
+      requestBody:
+        description: Содержимое запроса на создание сущности
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjCreateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjCreateResponse'
+  /obj/read:
+    post:
+      tags:
+        - obj
+      summary: Информация о сущности
+      operationId: objRead
+      requestBody:
+        description: Содержимое запроса на считывание информации о сущности
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjReadRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjReadResponse'
+  /obj/update:
+    post:
+      tags:
+        - obj
+      summary: Редактирования сущности
+      operationId: objUpdate
+      requestBody:
+        description: Содержимое запроса на редактирование сущности
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjUpdateResponse'
+  /obj/delete:
+    post:
+      tags:
+        - obj
+      summary: Удаление сущности
+      operationId: objDelete
+      requestBody:
+        description: Содержимое запроса на удаление сущности
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjDeleteRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjDeleteResponse'
+  /obj/search:
+    post:
+      tags:
+        - obj
+      summary: Поиск сущности
+      operationId: objSearch
+      requestBody:
+        description: Содержимое запроса поиска сущности
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjSearchRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjSearchResponse'
+  /obj/listTags:
+    post:
+      tags:
+        - obj
+        - tag
+      summary: Получение меток сущности
+      operationId: objListTags
+      requestBody:
+        description: Содержимое запроса для получения меток сущности
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjListTagsRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjListTagsResponse'
+  /obj/setTags:
+    post:
+      tags:
+        - obj
+        - tag
+      summary: Назначение меток сущности
+      operationId: objSetTags
+      requestBody:
+        description: Содержимое запроса для назначения меток сущности
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjSetTagsRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjSetTagsResponse'
+
+
+  /tag/delete:
+    post:
+      tags:
+        - tag
+      summary: Удаление метки
+      operationId: tagDelete
+      requestBody:
+        description: Содержимое запроса на удаление метки
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagDeleteRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagDeleteResponse'
+  /tag/search:
+    post:
+      tags:
+        - tag
+      summary: Поиск метки
+      operationId: tagSearch
+      requestBody:
+        description: Содержимое запроса поиска метки
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagSearchRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagSearchResponse'
+  /tag/objects:
+    post:
+      tags:
+        - obj
+        - tag
+      summary: Получение сущностей по заданной метке
+      operationId: tagListObjs
+      requestBody:
+        description: Содержимое запроса для получения сущностей с заданной меткой
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagListObjsRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagListObjsResponse'
+
+components:
+  schemas:
+
+    IRequest:
+      type: object
+      description: Базовый интерфейс для всех запросов
+      properties:
+        requestType:
+          type: string
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+        requestId:
+          type: string
+          description: Идентификатор запроса для отладки
+      discriminator:
+        propertyName: requestType
+        mapping:
+          objCreate:   '#/components/schemas/ObjCreateRequest'
+          objRead:     '#/components/schemas/ObjReadRequest'
+          objUpdate:   '#/components/schemas/ObjUpdateRequest'
+          objDelete:   '#/components/schemas/ObjDeleteRequest'
+          objSearch:   '#/components/schemas/ObjSearchRequest'
+          objListTags: '#/components/schemas/ObjListTagsRequest'
+          objSetTags:  '#/components/schemas/ObjSetTagsRequest'
+          tagDelete:   '#/components/schemas/TagDeleteRequest'
+          tagSearch:   '#/components/schemas/TagSearchRequest'
+          tagListObjs: '#/components/schemas/TagListObjsRequest'
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        group:
+          type: string
+        field:
+          type: string
+        message:
+          type: string
+
+    ResponseResult:
+      type: string
+      enum:
+        - success
+        - error
+
+    IResponse:
+      type: object
+      description: Базовый интерфейс для всех ответов
+      properties:
+        responseType:
+          type: string
+          description: Дискриминатор для вычисления типа запроса
+          example: create
+        requestId:
+          type: string
+          description: Идентификатор запроса для отладки
+        result:
+          $ref: '#/components/schemas/ResponseResult'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+
+      discriminator:
+        propertyName: responseType
+        mapping:
+          objCreate:   '#/components/schemas/ObjCreateResponse'
+          objRead:     '#/components/schemas/ObjReadResponse'
+          objUpdate:   '#/components/schemas/ObjUpdateResponse'
+          objDelete:   '#/components/schemas/ObjDeleteResponse'
+          objSearch:   '#/components/schemas/ObjSearchResponse'
+          objListTags: '#/components/schemas/ObjListTagsResponse'
+          objSetTags:  '#/components/schemas/ObjSetTagsResponse'
+          tagDelete:   '#/components/schemas/TagDeleteResponse'
+          tagSearch:   '#/components/schemas/TagSearchResponse'
+          tagListObjs: '#/components/schemas/TagListObjsResponse'
+
+    UserId:
+      type: string
+      description: Идентификатор пользователя
+
+    CreatedAt:
+      type: string
+      description: Дата-время создания
+
+    UpdatedAt:
+      type: string
+      description: Дата-время последнего редактирования
+
+    ObjId:
+      type: string
+      description: Идентификатор сущности
+
+    TagCode:
+      type: string
+      description: пермалинк метки
+
+    TagId:
+      type: string
+      description: Идентификатор метки
+
+    BaseObj:
+      type: object
+      description: Объект описывает свойства, одинаковые для create и update
+      properties:
+        name:
+          type: string
+          description: Наименование сущности
+        content:
+          type: string
+          description: Содержимое сущности
+        objType:
+          $ref: '#/components/schemas/ObjType'
+
+    ObjType:
+      type: string
+      description: 'Типы сущностей'
+      enum:
+        - text
+        - href
+        - base64
+
+    ObjInitResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+
+    ObjCreateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseObj'
+    ObjCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/ObjRequestDebug'
+        - type: object
+          properties:
+            obj:
+              $ref: '#/components/schemas/ObjCreateObject'
+
+    ObjReadObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/ObjId'
+    ObjReadRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/ObjRequestDebug'
+        - type: object
+          properties:
+            obj:
+              $ref: '#/components/schemas/ObjReadObject'
+
+    ObjUpdateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseObj'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/ObjId'
+    ObjUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/ObjRequestDebug'
+        - type: object
+          properties:
+            obj:
+              $ref: '#/components/schemas/ObjUpdateObject'
+
+    ObjDeleteObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/ObjId'
+    ObjDeleteRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/ObjRequestDebug'
+        - type: object
+          properties:
+            obj:
+              $ref: '#/components/schemas/ObjDeleteObject'
+
+    ObjSearchFilter:
+      type: object
+      description: Набор фильтров для поиска
+      properties:
+        searchString:
+          type: string
+          description: Поисковая строка, которая будет искаться в сущностях
+    ObjSearchRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/ObjRequestDebug'
+        - type: object
+          properties:
+            objFilter:
+              $ref: '#/components/schemas/ObjSearchFilter'
+
+    ObjListTagsObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/ObjId'
+    ObjListTagsRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/ObjRequestDebug'
+        - type: object
+          properties:
+            obj:
+              $ref: '#/components/schemas/ObjListTagsObject'
+
+    ObjSetTagsObject:
+      properties:
+        id:
+          $ref: '#/components/schemas/ObjId'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagCode'
+    ObjSetTagsRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/ObjRequestDebug'
+        - type: object
+          properties:
+            obj:
+              $ref: '#/components/schemas/ObjSetTagsObject'
+
+    TagDeleteObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TagId'
+    TagDeleteRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TagRequestDebug'
+        - type: object
+          properties:
+            tag:
+              $ref: '#/components/schemas/TagDeleteObject'
+
+    TagSearchFilter:
+      type: object
+      description: Набор фильтров для поиска
+      properties:
+        searchString:
+          type: string
+          description: Поисковая строка, по которой будут искаться метки
+    TagSearchRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TagRequestDebug'
+        - type: object
+          properties:
+            tagFilter:
+              $ref: '#/components/schemas/TagSearchFilter'
+
+    TagListObjsObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TagId'
+
+    TagListObjsRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TagRequestDebug'
+        - type: object
+          properties:
+            tag:
+              $ref: '#/components/schemas/TagListObjsObject'
+
+
+    ObjResponseObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseObj'
+        - type: object
+          description: Объект, который возвращается в ответе сервера
+          properties:
+            id:
+              $ref: '#/components/schemas/ObjId'
+            authorId:
+              $ref: '#/components/schemas/UserId'
+            createdAt:
+              $ref: '#/components/schemas/CreatedAt'
+            updatedAt:
+              $ref: '#/components/schemas/UpdatedAt'
+
+    ObjResponseSingle:
+      allOf:
+        - type: object
+          description: Ответ с одним объектом
+          properties:
+            obj:
+              $ref: '#/components/schemas/ObjResponseObject'
+
+    ObjResponseMulti:
+      allOf:
+        - type: object
+          description: Список найденных объектов
+          properties:
+            objs:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjResponseObject'
+
+    ObjCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ObjResponseSingle'
+
+    ObjReadResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ObjResponseSingle'
+
+    ObjUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ObjResponseSingle'
+
+    ObjDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ObjResponseSingle'
+
+    ObjSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ObjResponseMulti'
+
+    ObjListTagsResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ObjResponseSingle'
+        - $ref: '#/components/schemas/TagResponseMulti'
+
+    ObjSetTagsResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/ObjResponseSingle'
+        - $ref: '#/components/schemas/TagResponseMulti'
+
+
+    TagDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/TagResponseSingle'
+    TagSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/TagResponseMulti'
+
+    TagListObjsResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/TagResponseSingle'
+        - $ref: '#/components/schemas/ObjResponseMulti'
+
+    BaseTag:
+      type: object
+      description: Основные свойства меток
+      properties:
+        name:
+          type: string
+          description: Наименование
+        code:
+          $ref: '#/components/schemas/TagCode'
+
+    TagResponseObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseTag'
+        - type: object
+          description: Объект, который возвращается в ответе сервера
+          properties:
+            id:
+              $ref: '#/components/schemas/ObjId'
+            objQty:
+                type: integer
+                description: Количество объектов с такой меткой
+            createdAt:
+              $ref: '#/components/schemas/CreatedAt'
+            updatedAt:
+              $ref: '#/components/schemas/UpdatedAt'
+
+    TagResponseSingle:
+      allOf:
+        - type: object
+          description: Ответ с одной меткой
+          properties:
+            tag:
+              $ref: '#/components/schemas/TagResponseObject'
+
+    TagResponseMulti:
+      allOf:
+        - type: object
+          description: Список найденных меток
+          properties:
+            tags:
+              type: array
+              items:
+                $ref: '#/components/schemas/TagResponseObject'
+
+
+    # STUBS ======================
+    RequestDebugMode:
+      type: string
+      enum:
+        - prod
+        - test
+        - stub
+
+    ObjRequestDebug:
+      type: object
+      properties:
+        debug:
+          $ref: '#/components/schemas/ObjDebug'
+
+    ObjDebug:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/RequestDebugMode'
+        stub:
+          $ref: '#/components/schemas/ObjRequestDebugStubs'
+
+    ObjRequestDebugStubs:
+      type: string
+      description: Перечисления стабов
+      enum:
+        - success
+        - notFound
+        - badId
+        - badName
+        - badContent
+        - badType
+        - badSearchString
+        - cannotDelete
+
+    TagRequestDebug:
+      type: object
+      properties:
+        debug:
+          $ref: '#/components/schemas/TagDebug'
+
+    TagDebug:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/RequestDebugMode'
+        stub:
+          $ref: '#/components/schemas/TagRequestDebugStubs'
+
+    TagRequestDebugStubs:
+      type: string
+      description: Перечисления стабов
+      enum:
+        - success
+        - notFound
+        - badCode
+        - badName
+        - badSearchString
+        - cannotDelete
