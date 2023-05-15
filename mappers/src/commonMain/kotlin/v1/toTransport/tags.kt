@@ -1,4 +1,4 @@
-package site.geniyz.otus.mappers.v1.toTrans
+package site.geniyz.otus.mappers.v1.toTransport
 
 import site.geniyz.otus.api.v1.models.*
 import site.geniyz.otus.common.AppContext
@@ -9,24 +9,24 @@ import kotlinx.datetime.Instant
 
 fun AppContext.toTransportTagDelete() = TagDeleteResponse(
     responseType = "tagDelete",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     tag = tagResponse.toTransport(),
 )
 
 fun AppContext.toTransportTagSearch() = TagSearchResponse(
     responseType = "tagSearch",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     tags = tagsResponse.toTransport(),
 )
 
 fun AppContext.toTransportTagListObjs() = TagListObjsResponse(
     responseType = "tagListObjs",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     tag  = tagResponse.toTransport(),
     objs = objsResponse.toTransport(),

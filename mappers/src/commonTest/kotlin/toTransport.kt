@@ -1,4 +1,4 @@
-package site.geniyz.otus.mappers.v1.toTrans
+package site.geniyz.otus.mappers.v1.toTransport
 
 import site.geniyz.otus.api.v1.models.*
 import site.geniyz.otus.common.AppContext

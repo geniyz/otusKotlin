@@ -1,4 +1,4 @@
-package site.geniyz.otus.mappers.v1.toTrans
+package site.geniyz.otus.mappers.v1.toTransport
 
 import site.geniyz.otus.api.v1.models.*
 import site.geniyz.otus.common.AppContext
@@ -9,48 +9,48 @@ import site.geniyz.otus.common.NONE
 
 fun AppContext.toTransportObjCreate() = ObjCreateResponse(
     responseType = "objCreate",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     obj = objResponse.toTransport(),
 )
 
 fun AppContext.toTransportObjRead() = ObjReadResponse(
     responseType = "objRead",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     obj = objResponse.toTransport(),
 )
 
 fun AppContext.toTransportObjUpdate() = ObjUpdateResponse(
     responseType = "objUpdate",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     obj = objResponse.toTransport(),
 )
 
 fun AppContext.toTransportObjDelete() = ObjDeleteResponse(
     responseType = "objDelete",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     obj = objResponse.toTransport(),
 )
 
 fun AppContext.toTransportObjSearch() = ObjSearchResponse(
     responseType = "objSearch",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     objs = objsResponse.toTransport(),
 )
 
 fun AppContext.toTransportObjListTags() = ObjListTagsResponse(
     responseType = "objListTags",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     obj  = objResponse.toTransport(),
     tags = tagsResponse.toTransport(),
@@ -58,8 +58,8 @@ fun AppContext.toTransportObjListTags() = ObjListTagsResponse(
 
 fun AppContext.toTransportObjSetTags() = ObjSetTagsResponse(
     responseType = "objListTags",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    requestId = requestId.toTransport(),
+    result = state.toTransport(),
     errors = errors.toTransportErrors(),
     obj  = objResponse.toTransport(),
     tags = tagsResponse.toTransport(),
@@ -67,7 +67,7 @@ fun AppContext.toTransportObjSetTags() = ObjSetTagsResponse(
 
 fun AppContext.toTransportInit() = ObjInitResponse(
     responseType = "init",
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
+    requestId = requestId.toTransport(),
     result = if (errors.isEmpty()) ResponseResult.SUCCESS else ResponseResult.ERROR,
     errors = errors.toTransportErrors(),
 )

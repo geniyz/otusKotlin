@@ -1,4 +1,4 @@
-package site.geniyz.otus.mappers.v1.fromTrans
+package site.geniyz.otus.mappers.v1.fromTransport
 
 import site.geniyz.otus.api.v1.models.*
 import site.geniyz.otus.mappers.v1.exceptions.UnknownRequestClass

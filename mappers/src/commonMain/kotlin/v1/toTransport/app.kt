@@ -1,4 +1,4 @@
-package site.geniyz.otus.mappers.v1.toTrans
+package site.geniyz.otus.mappers.v1.toTransport
 
 import site.geniyz.otus.api.v1.models.*
 import site.geniyz.otus.common.AppContext
@@ -34,5 +34,9 @@ fun AppError.toTransport() = Error(
     field   = field.takeIf { it.isNotBlank() },
     message = message.takeIf { it.isNotBlank() },
 )
+
+fun AppState.toTransport()= if (this == AppState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR
+
+fun AppRequestId.toTransport()= this.asString().takeIf { it.isNotBlank() }
 
 fun Instant.asString()= toString()
