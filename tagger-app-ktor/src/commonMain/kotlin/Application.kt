@@ -28,7 +28,7 @@ fun Application.module(processor: AppProcessor = AppProcessor()) {
 }
 
 fun main() {
-    embeddedServer(CIO, port = 3333) {
+    embeddedServer(CIO) {
         module()
     }.start(wait = true)
 }
