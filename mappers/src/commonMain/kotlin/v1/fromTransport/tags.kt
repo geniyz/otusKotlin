@@ -34,7 +34,7 @@ fun AppContext.fromTransport(request: TagDeleteRequest) {
 }
 
 fun AppContext.fromTransport(request: TagSearchRequest) {
-    command = AppCommand.OBJ_SEARCH
+    command = AppCommand.TAG_SEARCH
     requestId = request.requestId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
@@ -42,7 +42,7 @@ fun AppContext.fromTransport(request: TagSearchRequest) {
 }
 
 fun AppContext.fromTransport(request: TagListObjsRequest) {
-    command = AppCommand.OBJ_SEARCH
+    command = AppCommand.TAG_LIST_OBJS
     requestId = request.requestId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
