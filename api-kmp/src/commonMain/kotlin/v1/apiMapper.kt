@@ -1,5 +1,7 @@
 package site.geniyz.otus.api.v1
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import site.geniyz.otus.api.v1.models.*
 
 import kotlinx.serialization.json.Json
@@ -11,6 +13,8 @@ import kotlinx.serialization.modules.SerializersModule
  *  этот перечень необходимо пополнять
  */
 internal val infos = listOf(
+    info(ObjInitResponse::class,     IResponse::class, "init"       ) { copy(responseType = it) }, // TODO: я до конца не понимаю пока что это
+
     info(ObjCreateRequest::class,    IRequest::class, "objCreate"   ) { copy(requestType = it) },
     info(ObjReadRequest::class,      IRequest::class, "objRead"     ) { copy(requestType = it) },
     info(ObjUpdateRequest::class,    IRequest::class, "objUpdate"   ) { copy(requestType = it) },
@@ -45,3 +49,13 @@ val apiV1Mapper = Json {
         setupPolymorphic()
     }
 }
+
+fun apiV1RequestSerialize(request: IRequest): String = apiV1Mapper.encodeToString(request)
+
+@Suppress("UNCHECKED_CAST")
+fun <T : IRequest> apiV1RequestDeserialize(json: String): T = apiV1Mapper.decodeFromString<IRequest>(json) as T
+
+fun apiV1ResponseSerialize(response: IResponse): String = apiV1Mapper.encodeToString(response)
+
+@Suppress("UNCHECKED_CAST")
+fun <T : IResponse> apiV1ResponseDeserialize(json: String): T = apiV1Mapper.decodeFromString<IResponse>(json) as T
