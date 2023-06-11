@@ -20,4 +20,5 @@ include(
     "stubs",           // заглушки
     "biz",             // бизнес-логика
     "tagger-app-ktor", // собсно приложение http и ws
+    "acceptance-tests",// приёмочные тесты докером
     )
