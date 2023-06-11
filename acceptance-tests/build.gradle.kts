@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm")
-    id("io.ktor.plugin")
 }
 
 dependencies {
@@ -50,12 +49,3 @@ tasks {
 }
 
 java.targetCompatibility = JavaVersion.VERSION_11
-
-ktor {
-    docker {
-        localImageName.set(project.name + "-ktor")
-        imageTag.set(project.version.toString())
-        jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_11)
-    }
-}
-

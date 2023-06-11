@@ -24,6 +24,8 @@ application {
     mainClass.set("io.ktor.server.cio.EngineMain")
 }
 
+java.targetCompatibility = JavaVersion.VERSION_11
+
 ktor {
     docker {
         localImageName.set(project.name + "-ktor")
