@@ -2,10 +2,8 @@ package site.geniyz.otus.blackbox.fixture.client
 
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.okhttp.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import site.geniyz.otus.blackbox.fixture.client.Client
 import site.geniyz.otus.blackbox.fixture.docker.DockerCompose
 
 /**
@@ -13,7 +11,7 @@ import site.geniyz.otus.blackbox.fixture.docker.DockerCompose
  */
 class RestClient(dockerCompose: DockerCompose) : Client {
     private val urlBuilder by lazy { dockerCompose.inputUrl }
-    private val client = HttpClient(OkHttp)
+    private val client = HttpClient()
     override suspend fun sendAndReceive(version: String, path: String, request: String): String {
         val url = urlBuilder.apply {
             path("$version/$path")
@@ -26,7 +24,6 @@ class RestClient(dockerCompose: DockerCompose) : Client {
             }
             accept(ContentType.Application.Json)
             setBody(request)
-
         }.call
 
         return resp.body()

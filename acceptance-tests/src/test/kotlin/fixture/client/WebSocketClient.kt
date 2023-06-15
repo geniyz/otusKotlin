@@ -29,7 +29,7 @@ class WebSocketClient(dockerCompose: DockerCompose) : Client {
             withTimeout(2000) {
                 val incame = incoming.receive() as Frame.Text
                 val data = incame.readText()
-                // init - игнорим
+                // надо как-то игнорировать "responseType":"init"
             }
             send(Frame.Text(request))
 

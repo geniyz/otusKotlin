@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm")
 }
 
-val jvmTarget = "19"
+val jvmTarget = "11"
 
 group = "site.geniyz.otus"
 version = "0.0.1-SNAPSHOT"

@@ -26,10 +26,10 @@ fun FunSpec.testApiV1(client: Client, prefix: String = "") {
 
         test("Update Obj ok") {
             val created = client.createObj()
-            client.updateObj(created.id, ObjUpdateObject(name = "Selling Nut"))
+            client.updateObj(created.id, ObjUpdateObject(name = "Текст1"))
             client.readObj(created.id) {
                 // TODO раскомментировать, когда будет реальный реп
-                //it.obj?.name shouldBe "Selling Nut"
+                //it.obj?.name shouldBe "Текст1"
                 //it.obj?.content shouldBe someCreateObj.content
             }
         }
@@ -43,21 +43,21 @@ fun FunSpec.testApiV1(client: Client, prefix: String = "") {
         }
 
         test("Search Obj ok") {
-            val created1 = client.createObj(someCreateObj.copy(name = "Selling Bolt"))
-            val created2 = client.createObj(someCreateObj.copy(name = "Selling Nut"))
+            val created1 = client.createObj(someCreateObj.copy(name = "Текст1"))
+            // val created2 = client.createObj(someCreateObj.copy(name = "Текст2"))
 
-            withClue("Search Selling") {
-                val results = client.searchObj(search = ObjSearchFilter(searchString = "Selling"))
+            withClue("Search Текст") {
+                val results = client.searchObj(search = ObjSearchFilter(searchString = "Текст"))
                 // TODO раскомментировать, когда будет реальный реп
                 // results shouldHaveSize 2
-                // results shouldExist { it.name == "Selling Bolt" }
-                // results shouldExist { it.name == "Selling Nut" }
+                // results shouldExist { it.name == "Текст1" }
+                // results shouldExist { it.name == "Текст2" }
             }
 
-            withClue("Search Bolt") {
-                client.searchObj(search = ObjSearchFilter(searchString = "Bolt"))
+            withClue("Search Текст2") {
+                client.searchObj(search = ObjSearchFilter(searchString = "Текст1"))
                 // TODO раскомментировать, когда будет реальный реп
-                // .shouldExistInOrder({ it.name == "Selling Bolt" })
+                // .shouldExistInOrder({ it.name == "Текст2" })
             }
         }
 

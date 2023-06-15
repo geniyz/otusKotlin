@@ -34,6 +34,7 @@ dependencies {
 
     testImplementation("io.ktor:ktor-client-core:$ktorVersion")
     testImplementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+    testImplementation(project(mapOf("path" to ":stubs")))
 }
 
 var severity: String = "MINOR"

@@ -13,7 +13,6 @@ import kotlinx.serialization.modules.SerializersModule
  *  этот перечень необходимо пополнять
  */
 internal val infos = listOf(
-    info(ObjInitResponse::class,     IResponse::class, "init"       ) { copy(responseType = it) }, // TODO: я до конца не понимаю пока что это
 
     info(ObjCreateRequest::class,    IRequest::class, "objCreate"   ) { copy(requestType = it) },
     info(ObjReadRequest::class,      IRequest::class, "objRead"     ) { copy(requestType = it) },
@@ -24,7 +23,7 @@ internal val infos = listOf(
     info(ObjSetTagsRequest::class,   IRequest::class, "objSetTags"  ) { copy(requestType = it) },
 
     info(ObjCreateResponse::class,   IResponse::class, "objCreate"  ) { copy(responseType = it) },
-    info(ObjReadResponse::class,     IResponse::class, "objRread"   ) { copy(responseType = it) },
+    info(ObjReadResponse::class,     IResponse::class, "objRead"    ) { copy(responseType = it) },
     info(ObjUpdateResponse::class,   IResponse::class, "objUpdate"  ) { copy(responseType = it) },
     info(ObjDeleteResponse::class,   IResponse::class, "objDelete"  ) { copy(responseType = it) },
     info(ObjSearchResponse::class,   IResponse::class, "objSearch"  ) { copy(responseType = it) },
@@ -38,6 +37,9 @@ internal val infos = listOf(
     info(TagDeleteResponse::class,   IResponse::class, "tagDelete"  ) { copy(responseType = it) },
     info(TagSearchResponse::class,   IResponse::class, "tagSearch"  ) { copy(responseType = it) },
     info(TagListObjsResponse::class, IResponse::class, "tagListObjs") { copy(responseType = it) },
+
+    info(ObjInitResponse::class,     IResponse::class, "init"       ) { copy(responseType = it) }, // TODO: я до конца не понимаю пока что это
+
 )
 
 val apiV1Mapper = Json {

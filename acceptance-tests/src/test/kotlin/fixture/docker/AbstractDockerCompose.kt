@@ -3,6 +3,7 @@ package site.geniyz.otus.blackbox.docker
 import io.ktor.http.*
 import mu.KotlinLogging
 import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.containers.wait.strategy.Wait
 
 import site.geniyz.otus.blackbox.fixture.docker.DockerCompose
 
@@ -36,13 +37,13 @@ abstract class AbstractDockerCompose(
                     service,
                     port,
                 )
+                waitingFor(service, Wait.forHttp("/"))
             }
             withLocalCompose(true)
         }
 
     override fun start() {
         compose.start()
-
         log.warn("\n=========== $dockerComposeName started =========== \n")
         apps.forEachIndexed { index, _ ->
             log.info { "Started docker-compose with App at: ${getUrl(index)}" }
