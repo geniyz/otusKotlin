@@ -6,8 +6,7 @@ import site.geniyz.otus.common.NONE
 import site.geniyz.otus.common.models.*
 
 object AppStubObjs {
-    private val OBJ_TEXT1: AppObj
-        get() = AppObj(
+    private val OBJ_TEXT1 = AppObj(
             id        = AppObjId("obj-text-0000"),
             name      = "Текст1",             // наименование
             content   = "Какой-то тест",      // содержимое

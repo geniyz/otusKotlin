@@ -12,6 +12,23 @@ class AppProcessor {
 
         if(ctx.command.name.startsWith("OBJ_")) { // Объекты
             when (ctx.command) {
+
+                AppCommand.OBJ_CREATE -> {
+                    ctx.objResponse = AppStubObjs.getText()
+                }
+
+                AppCommand.OBJ_READ -> {
+                    ctx.objResponse = AppStubObjs.getText()
+                }
+
+                AppCommand.OBJ_UPDATE -> {
+                    ctx.objResponse = AppStubObjs.getText()
+                }
+
+                AppCommand.OBJ_DELETE -> {
+                    ctx.objResponse = AppStubObjs.getText()
+                }
+
                 AppCommand.OBJ_SEARCH -> {
                     ctx.objsResponse.addAll(AppStubObjs.prepareSearchList("Объектъ"))
                 }
@@ -34,6 +51,11 @@ class AppProcessor {
 
         if(ctx.command.name.startsWith("TAG_")) { // Метки
             when (ctx.command) {
+
+                AppCommand.TAG_DELETE -> {
+                    ctx.tagResponse = AppStubTags.get()
+                }
+
                 AppCommand.TAG_SEARCH -> {
                     ctx.tagsResponse.addAll(AppStubTags.prepareSearchList("Метка"))
                 }
