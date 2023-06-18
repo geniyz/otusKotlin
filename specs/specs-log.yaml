@@ -1,0 +1,133 @@
+openapi: 3.0.4
+info:
+  title: App0lication log models
+  description: Log models for logging services of our application
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+paths: {}
+
+components:
+  schemas:
+    CommonLogModel:
+      title: Общая модель лога
+      description: Общая модель лога для всех микросервисов системы
+      type: object
+      properties:
+        messageTime:
+          type: string
+        logId:
+          type: string
+        source:
+          type: string
+        obj:
+          $ref: '#/components/schemas/AppLogModel'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorLogModel'
+
+    AppLogModel:
+      title: Модель лога для микросервиса Tagger
+      type: object
+      properties:
+        requestId:
+          type: string
+        operation:
+          type: string
+          enum:
+            - objCreate
+            - objRead
+            - objUpdate
+            - objDelete
+            - objSearch
+            - objListTags
+            - objSetTags
+            - tagSearch
+            - tagDelete
+            - tagObjects
+        requestObj:
+          $ref: '#/components/schemas/ObjLog'
+        requestObjFilter:
+          $ref: '#/components/schemas/ObjFilterLog'
+        responseObj:
+          $ref: '#/components/schemas/ObjLog'
+        responseObjs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjLog'
+        requestTag:
+          $ref: '#/components/schemas/TagLog'
+        requestTagFilter:
+          $ref: '#/components/schemas/TagFilterLog'
+        responseTag:
+          $ref: '#/components/schemas/TagLog'
+        responseTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagLog'
+
+    ErrorLogModel:
+      title: Модель лога для ошибки
+      type: object
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        code:
+          type: string
+        level:
+          type: string
+
+    ObjLog:
+      title: Модель лога для объекта
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        content:
+          type: string
+        objType:
+          type: string
+        authorId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+
+    ObjFilterLog:
+      title: Модель лога фильтра объектов
+      properties:
+        searchString:
+          type: string
+        authorId:
+          type: string
+
+
+    TagLog:
+      title: Модель лога для метки
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+
+    TagFilterLog:
+      title: Модель лога фильтра меток
+      properties:
+        searchString:
+          type: string
+        authorId:
+          type: string

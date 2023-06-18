@@ -23,5 +23,6 @@ subprojects {
 
     tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = jvmTarget
+        java.targetCompatibility = JavaVersion.VERSION_11
     }
 }
