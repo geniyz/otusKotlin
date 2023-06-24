@@ -34,6 +34,6 @@ fun AppError.toTransport() = Error(
     message = message.takeIf { it.isNotBlank() },
 )
 
-fun AppState.toTransport()= if (this != AppState.FAILING) ResponseResult.SUCCESS else ResponseResult.ERROR
+fun AppState.toTransport()= if (this == AppState.FINISHING) ResponseResult.SUCCESS else ResponseResult.ERROR
 
 fun AppRequestId.toTransport()= this.asString().takeIf { it.isNotBlank() }

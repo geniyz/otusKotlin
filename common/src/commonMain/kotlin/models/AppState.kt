@@ -4,4 +4,5 @@ enum class AppState {
     NONE,
     RUNNING,
     FAILING,
+    FINISHING,
 }

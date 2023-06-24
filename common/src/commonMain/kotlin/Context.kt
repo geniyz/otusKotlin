@@ -26,4 +26,18 @@ data class AppContext(
     var tagFilterRequest: AppTagFilter        = AppTagFilter(),    // поисковый запрос при фильтрации меток
     var tagResponse:      AppTag              = AppTag(),          // ответ - метка
     var tagsResponse:     MutableList<AppTag> = mutableListOf(),   // ответ - набор меток
+
+    var objValidating:       AppObj              = AppObj(),
+    var objFilterValidating: AppObjFilter        = AppObjFilter(),
+
+    var objValidated:        AppObj              = AppObj(),
+    var objFilterValidated:  AppObjFilter        = AppObjFilter(),
+
+    var tagValidating:       AppTag              = AppTag(),
+    var tagsValidating:      MutableList<AppTag> = mutableListOf(),
+    var tagFilterValidating: AppTagFilter        = AppTagFilter(),
+
+    var tagValidated:        AppTag              = AppTag(),
+    var tagsValidated:       MutableList<AppTag> = mutableListOf(),
+    var tagFilterValidated:  AppTagFilter        = AppTagFilter(),
 )
