@@ -12,8 +12,6 @@ import io.ktor.server.websocket.*
 import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.app.plugins.initAppSettings
 import site.geniyz.otus.app.v1.*
-import site.geniyz.otus.biz.AppProcessor
-
 
 fun Application.module(appSettings: AppSettings = initAppSettings()) {
 

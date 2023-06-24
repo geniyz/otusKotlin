@@ -4,8 +4,6 @@ import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import site.geniyz.otus.app.AppSettings
 
-import site.geniyz.otus.biz.AppProcessor
-
 fun Route.v1Objs(appSettings: AppSettings) {
     val logger = appSettings.loggerProvider.logger(Route::v1Objs)
     route("obj") {
