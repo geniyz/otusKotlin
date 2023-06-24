@@ -1,0 +1,138 @@
+### Create
+POST http://127.0.0.1:8088/v1/obj/create
+Content-Type: application/json
+
+{
+  "requestType": "objCreate",
+  "requestId": "12345",
+  "obj": {
+    "name": "Болт",
+    "content": "КРУТЕЙШИЙ",
+    "objType": "text"
+  },
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}
+
+### Get unexisted ID
+POST http://127.0.0.1:8088/v1/obj/read
+Content-Type: application/json
+
+{
+  "requestType": "objRead",
+  "requestId": "12345",
+  "obj": {
+    "id": "99999"
+  },
+  "debug": {
+    "stub": "badId"
+  }
+}
+
+### Read With Existed id
+POST http://127.0.0.1:8088/v1/obj/read
+Content-Type: application/json
+
+{
+  "requestType": "objRead",
+  "requestId": "12345",
+  "obj": {
+    "id": "existed"
+  },
+  "debug": {
+    "stub": "success"
+  }
+}
+
+### Update
+POST http://localhost:8088/v1/obj/update
+Content-Type: application/json
+
+{
+  "requestType": "objUpdate",
+  "requestId": "666",
+  "obj": {
+    "objType": "href",
+    "id": "updated"
+  },
+  "debug": {
+    "stub": "success"
+  }
+}
+
+### Update with unexistedId
+POST http://localhost:8088/v1/obj/update
+Content-Type: application/json
+
+{
+  "requestType": "objUpdate",
+  "requestId": "666",
+  "obj": {
+    "id": "668"
+  },
+  "debug": {
+    "stub": "badId"
+  }
+}
+
+### Delete existed
+POST http://localhost:8088/v1/obj/delete
+Content-Type: application/json
+
+{
+  "requestType": "objDelete",
+  "requestId": "deleteId",
+  "obj": {
+    "id": "existed_id"
+  },
+  "debug": {
+    "stub": "success"
+  }
+}
+
+### Delete non-existed
+POST http://localhost:8088/v1/obj/delete
+Content-Type: application/json
+
+{
+  "requestType": "objDelete",
+  "requestId": "deleteId_unknown",
+  "obj": {
+    "id": "unknownId"
+  },
+  "debug": {
+    "stub": "badId"
+  }
+}
+
+### Search by string
+POST http://localhost:8088/v1/obj/search
+Content-Type: application/json
+
+{
+  "requestType": "objSearch",
+  "requestId": "search_1",
+  "objFilter": {
+    "searchString": "болт"
+  },
+  "debug": {
+    "stub": "success"
+  }
+}
+
+### Search by string with error
+POST http://localhost:8088/v1/obj/search
+Content-Type: application/json
+
+{
+  "requestType": "objSearch",
+  "requestId": "search_1",
+  "objFilter": {
+    "searchString": "кто тут"
+  },
+  "debug": {
+    "stub": "badSearchString"
+  }
+}

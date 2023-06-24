@@ -2,45 +2,48 @@ package site.geniyz.otus.app.v1
 
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
+import site.geniyz.otus.app.AppSettings
 
 import site.geniyz.otus.biz.AppProcessor
 
-fun Route.v1Objs(processor: AppProcessor) {
+fun Route.v1Objs(appSettings: AppSettings) {
+    val logger = appSettings.loggerProvider.logger(Route::v1Objs)
     route("obj") {
         post("create") {
-            call.objCreate(processor)
+            call.objCreate(appSettings, logger)
         }
         post("read") {
-            call.objRead(processor)
+            call.objRead(appSettings, logger)
         }
         post("update") {
-            call.objUpdate(processor)
+            call.objUpdate(appSettings, logger)
         }
         post("delete") {
-            call.objDelete(processor)
+            call.objDelete(appSettings, logger)
         }
         post("search") {
-            call.objSearch(processor)
+            call.objSearch(appSettings, logger)
         }
         post("listTags") {
-            call.objListTags(processor)
+            call.objListTags(appSettings, logger)
         }
         post("setTags") {
-            call.objSetTags(processor)
+            call.objSetTags(appSettings, logger)
         }
     }
 }
 
-fun Route.v1Tags(processor: AppProcessor) {
+fun Route.v1Tags(appSettings: AppSettings) {
+    val logger = appSettings.loggerProvider.logger(Route::v1Tags)
     route("tag") {
         post("delete") {
-            call.tagDelete(processor)
+            call.tagDelete(appSettings, logger)
         }
         post("search") {
-            call.tagSearch(processor)
+            call.tagSearch(appSettings, logger)
         }
         post("objects") {
-            call.tagObjects(processor)
+            call.tagObjects(appSettings, logger)
         }
     }
 }

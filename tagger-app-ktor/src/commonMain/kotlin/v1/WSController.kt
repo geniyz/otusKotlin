@@ -13,6 +13,7 @@ import kotlinx.serialization.decodeFromString
 import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.api.v1.apiV1ResponseSerialize
 import site.geniyz.otus.api.v1.models.IRequest
+import site.geniyz.otus.app.AppSettings
 import site.geniyz.otus.biz.AppProcessor
 import site.geniyz.otus.common.AppContext
 import site.geniyz.otus.common.helpers.addError
@@ -27,7 +28,7 @@ class WSController {
 
     suspend fun handle(
         session: WebSocketSession,
-        processor: AppProcessor,
+        appSettings: AppSettings,
     ) {
         mutex.withLock {
             sessions.add(session) // добавить текущее соединение к имеющимся
@@ -36,7 +37,7 @@ class WSController {
         val ctx = AppContext() // новому соединению — новый контекст
 
         // послать инициализационные данные:
-        session.outgoing.send( Frame.Text( apiV1ResponseSerialize(ctx.toTransportInit()) ) ) // TODO: Я пока не понимаю что это («init») и зачем это
+        session.outgoing.send( Frame.Text( apiV1ResponseSerialize(ctx.toTransportInit()) ) )
 
         session.incoming.receiveAsFlow().mapNotNull { it ->
             val frame = it as? Frame.Text ?: return@mapNotNull
@@ -44,7 +45,7 @@ class WSController {
             try {
                 val request = apiV1Mapper.decodeFromString<IRequest>( frame.readText() ) // получить запрос
                 ctx.fromTransport(request) // распарсить
-                processor.exec(ctx) // обработать
+                appSettings.processor.exec(ctx) // обработать
                 val rez = Frame.Text( apiV1ResponseSerialize(ctx.toTransportInit()) ) // получить результат
 
                 // vvv -- послать результат
