@@ -21,4 +21,10 @@ include(
     "biz",             // бизнес-логика
     "tagger-app-ktor", // собсно приложение http и ws
     "acceptance-tests",// приёмочные тесты докером
+
+    "lib-log-common", "lib-log-kermit", "lib-log-logback",     // логгирование
+    "lib-log-api",                                             // сериализация моделей логгирования
+    "lib-log-mappers",                                         // преобразования в модели логгировыания
+
+    "lib-cor",         // Chain of Responsibility 
     )

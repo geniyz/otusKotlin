@@ -16,6 +16,8 @@ object AppStubTags {
         )
     fun get()= TAG_1
 
+    fun prepareResult(block: AppTag.() -> Unit): AppTag = get().apply(block)
+
     fun prepareSearchList(filter: String)= listOf(
         appTag("tag-0001", filter),
         appTag("tag-0002", filter),

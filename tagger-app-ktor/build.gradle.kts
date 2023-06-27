@@ -15,6 +15,9 @@ plugins {
     kotlin("multiplatform")
     id("io.ktor.plugin")
 }
+dependencies {
+    implementation("io.ktor:ktor-server-call-logging-jvm:2.3.0")
+}
 
 repositories {
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
@@ -23,8 +26,6 @@ repositories {
 application {
     mainClass.set("io.ktor.server.cio.EngineMain")
 }
-
-java.targetCompatibility = JavaVersion.VERSION_11
 
 ktor {
     docker {
@@ -58,7 +59,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                implementation(ktor("core")) // "io.ktor:ktor-server-core:$ktorVersion"
 
                 implementation(ktor("core")) // "io.ktor:ktor-server-core:$ktorVersion"
                 implementation(ktor("cio")) // "io.ktor:ktor-server-cio:$ktorVersion"
@@ -71,6 +71,7 @@ kotlin {
                 implementation(ktor("content-negotiation")) // "io.ktor:ktor-server-content-negotiation:$ktorVersion"
                 implementation(ktor("websockets")) // "io.ktor:ktor-websockets:$ktorVersion"
                 implementation(ktor("auth")) // "io.ktor:ktor-auth:$ktorVersion"
+                // implementation(ktor("call-logging")) // "io.ktor:ktor-server-call-logging:$ktorVersion"
 
                 implementation(project(":common"))
                 implementation(project(":biz"))
@@ -78,12 +79,24 @@ kotlin {
                 implementation(project(":mappers"))
                 implementation(project(":stubs"))
 
+                implementation(project(":lib-log-mappers"))
+                implementation(project(":lib-log-common"))
+                implementation(project(":lib-log-kermit"))
+
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
         }
 
+        val jvmMain by getting {
+            dependencies {
+                implementation(project(":lib-log-logback"))
+
+                implementation("com.sndyuk:logback-more-appenders:1.8.8")
+                implementation("org.fluentd:fluent-logger:0.3.4")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))

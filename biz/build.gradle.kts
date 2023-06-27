@@ -20,6 +20,9 @@ kotlin {
 
                 implementation(project(":common"))
                 implementation(project(":stubs"))
+                implementation(project(":lib-cor"))
+                implementation(project(":lib-log-common"))
+                implementation(project(":lib-log-mappers"))
             }
         }
         @Suppress("UNUSED_VARIABLE")

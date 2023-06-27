@@ -25,6 +25,8 @@ object AppStubObjs {
     fun getText()= OBJ_TEXT1
     fun getHref()= OBJ_HREF1
 
+    fun prepareResult(block: AppObj.() -> Unit): AppObj = getText().apply(block)
+
     fun prepareSearchList(filter: String)= listOf(
         appObjText("obj-text-0001", filter),
         appObjText("obj-text-0002", filter),

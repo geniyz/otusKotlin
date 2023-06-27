@@ -10,12 +10,13 @@ import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 
 import site.geniyz.otus.api.v1.apiV1Mapper
+import site.geniyz.otus.app.plugins.initAppSettings
 import site.geniyz.otus.app.v1.*
-import site.geniyz.otus.biz.AppProcessor
 
-fun Application.module(processor: AppProcessor = AppProcessor()) {
+fun Application.module(appSettings: AppSettings = initAppSettings()) {
 
     install(WebSockets)
+
     val ws = WSController()
 
     routing {
@@ -26,12 +27,12 @@ fun Application.module(processor: AppProcessor = AppProcessor()) {
             install(ContentNegotiation) {
                 json(apiV1Mapper)
             }
-            v1Objs(processor)
-            v1Tags(processor)
+            v1Objs(appSettings)
+            v1Tags(appSettings)
         }
 
         webSocket("/ws/v1") {
-            ws.handle(this, processor)
+            ws.handle(this, appSettings)
         }
     }
 }

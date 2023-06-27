@@ -1,71 +1,29 @@
 package site.geniyz.otus.app.v1
 
 import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 
-import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.api.v1.models.*
-import site.geniyz.otus.biz.AppProcessor
-import site.geniyz.otus.common.AppContext
-import site.geniyz.otus.mappers.v1.*
-import site.geniyz.otus.mappers.v1.fromTransport.fromTransport
-import site.geniyz.otus.mappers.v1.toTransport.*
+import site.geniyz.otus.app.AppSettings
+import site.geniyz.otus.common.models.AppCommand
+import site.geniyz.otus.logging.common.IAppLogWrapper
 
-suspend fun ApplicationCall.objCreate(processor: AppProcessor) { // Создание сущности
-    AppContext().let {
-        it.fromTransport(apiV1Mapper.decodeFromString<ObjCreateRequest>(receiveText()))
-        processor.exec(it)
-        respond(apiV1Mapper.encodeToString(it.toTransportObjCreate()))
-    }
-}
+suspend fun ApplicationCall.objCreate(appSettings: AppSettings, logger: IAppLogWrapper) = // Создание сущности
+    processV1<ObjCreateRequest, ObjCreateResponse>(appSettings, logger, "objCreate", AppCommand.OBJ_CREATE)
 
-suspend fun ApplicationCall.objRead(processor: AppProcessor) { // Считывание сущности
-    AppContext().let {
-        it.fromTransport(apiV1Mapper.decodeFromString<ObjReadRequest>(receiveText()))
-        processor.exec(it)
-        respond(apiV1Mapper.encodeToString(it.toTransportObjRead()))
-    }
-}
+suspend fun ApplicationCall.objRead(appSettings: AppSettings, logger: IAppLogWrapper) = // Считывание сущности
+    processV1<ObjReadRequest, ObjReadResponse>(appSettings, logger, "objRead", AppCommand.OBJ_READ)
 
-suspend fun ApplicationCall.objUpdate(processor: AppProcessor) { // Изменение сущности
-    AppContext().let {
-        it.fromTransport(apiV1Mapper.decodeFromString<ObjUpdateRequest>(receiveText()))
-        processor.exec(it)
-        respond(apiV1Mapper.encodeToString(it.toTransportObjUpdate()))
-    }
-}
+suspend fun ApplicationCall.objUpdate(appSettings: AppSettings, logger: IAppLogWrapper) = // Изменение сущности
+    processV1<ObjUpdateRequest, ObjUpdateResponse>(appSettings, logger, "objUpdate", AppCommand.OBJ_UPDATE)
 
-suspend fun ApplicationCall.objDelete(processor: AppProcessor) { // Удаление сущности
-    AppContext().let {
-        it.fromTransport(apiV1Mapper.decodeFromString<ObjDeleteRequest>(receiveText()))
-        processor.exec(it)
-        respond(apiV1Mapper.encodeToString(it.toTransportObjDelete()))
-    }
-}
+suspend fun ApplicationCall.objDelete(appSettings: AppSettings, logger: IAppLogWrapper) = // Удаление сущности
+    processV1<ObjDeleteRequest, ObjDeleteResponse>(appSettings, logger, "objDelete", AppCommand.OBJ_DELETE)
 
-suspend fun ApplicationCall.objSearch(processor: AppProcessor) { // Поиск/фильтрация сущностей
-    AppContext().let {
-        it.fromTransport(apiV1Mapper.decodeFromString<ObjSearchRequest>(receiveText()))
-        processor.exec(it)
-        respond(apiV1Mapper.encodeToString(it.toTransportObjSearch()))
-    }
-}
+suspend fun ApplicationCall.objSearch(appSettings: AppSettings, logger: IAppLogWrapper) = // Поиск/фильтрация сущностей
+    processV1<ObjSearchRequest, ObjSearchResponse>(appSettings, logger, "objSearch", AppCommand.OBJ_SEARCH)
 
-suspend fun ApplicationCall.objListTags(processor: AppProcessor) { // Список меток сущности
-    AppContext().let {
-        it.fromTransport(apiV1Mapper.decodeFromString<ObjListTagsRequest>(receiveText()))
-        processor.exec(it)
-        respond(apiV1Mapper.encodeToString(it.toTransportObjListTags()))
-    }
-}
+suspend fun ApplicationCall.objListTags(appSettings: AppSettings, logger: IAppLogWrapper) = // Список меток сущности
+    processV1<ObjListTagsRequest, ObjListTagsResponse>(appSettings, logger, "objListTags", AppCommand.OBJ_LIST_TAGS)
 
-suspend fun ApplicationCall.objSetTags(processor: AppProcessor) { // Изменение перечня меток сущности
-    AppContext().let {
-        it.fromTransport(apiV1Mapper.decodeFromString<ObjSetTagsRequest>(receiveText()))
-        processor.exec(it)
-        respond(apiV1Mapper.encodeToString(it.toTransportObjSetTags()))
-    }
-}
+suspend fun ApplicationCall.objSetTags(appSettings: AppSettings, logger: IAppLogWrapper) = // Изменение перечня меток сущности
+    processV1<ObjSetTagsRequest, ObjSetTagsResponse>(appSettings, logger, "objSetTags", AppCommand.OBJ_SET_TAGS)

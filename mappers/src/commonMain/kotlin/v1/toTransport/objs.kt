@@ -6,6 +6,7 @@ import site.geniyz.otus.common.models.*
 
 import kotlinx.datetime.Instant
 import site.geniyz.otus.common.NONE
+import site.geniyz.otus.common.helpers.asString
 
 fun AppContext.toTransportObjCreate() = ObjCreateResponse(
     responseType = "objCreate",
