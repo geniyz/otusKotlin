@@ -26,5 +26,9 @@ include(
     "lib-log-api",                                             // сериализация моделей логгирования
     "lib-log-mappers",                                         // преобразования в модели логгировыания
 
-    "lib-cor",         // Chain of Responsibility 
+    "lib-cor",         // Chain of Responsibility
+
+    // "repo-stubs",
+    "repo-tests",
+    "repo-inmem",
     )

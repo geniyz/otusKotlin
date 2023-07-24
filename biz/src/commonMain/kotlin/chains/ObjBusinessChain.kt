@@ -1,5 +1,7 @@
 package site.geniyz.otus.biz
 
+import site.geniyz.otus.biz.general.*
+import site.geniyz.otus.biz.repo.*
 import site.geniyz.otus.biz.groups.*
 import site.geniyz.otus.biz.workers.*
 
@@ -12,7 +14,10 @@ import site.geniyz.otus.biz.validation.*
 
 val ObjBusinessChain: ICorExec<AppContext>
     get() = rootChain<AppContext> {
-                operation("Создание сущности", AppCommand.OBJ_CREATE) {
+        initStatus("Инициализация статуса")
+        initRepo("Инициализация репозитория")
+
+        operation("Создание сущности", AppCommand.OBJ_CREATE) {
                     stubs("Обработка стабов") {
                         stubObjCreateSuccess("Имитация успешной обработки")
                         stubObjValidationBadName("Имитация ошибки валидации заголовка")
@@ -34,6 +39,12 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Завершение проверок")
                     }
+                    chain {
+                        title = "Логика сохранения"
+                        repoObjPrepareCreate("Подготовка объекта для сохранения")
+                        repoObjCreate("Создание объекта в БД")
+                    }
+                    prepareResult("Подготовка ответа")
                 }
                 operation("Получить сущность", AppCommand.OBJ_READ) {
                     stubs("Обработка стабов") {

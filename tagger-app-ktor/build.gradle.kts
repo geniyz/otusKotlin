@@ -83,6 +83,9 @@ kotlin {
                 implementation(project(":lib-log-common"))
                 implementation(project(":lib-log-kermit"))
 
+                implementation(project(":repo-inmem"))
+                // implementation(project(":repo-stubs"))
+
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
@@ -106,6 +109,8 @@ kotlin {
                 implementation(ktor("test-host"))
                 implementation(ktor("content-negotiation", prefix = "client-"))
                 implementation(ktor("websockets", prefix = "client-"))
+
+                implementation(project(":repo-tests"))
             }
         }
 

@@ -20,6 +20,7 @@ kotlin {
 
                 implementation(project(":common"))
                 implementation(project(":stubs"))
+                implementation(project(":repo-inmem"))
                 implementation(project(":lib-cor"))
                 implementation(project(":lib-log-common"))
                 implementation(project(":lib-log-mappers"))

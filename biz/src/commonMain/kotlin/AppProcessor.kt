@@ -8,17 +8,20 @@ import site.geniyz.otus.common.models.*
 import site.geniyz.otus.logging.common.*
 
 import site.geniyz.otus.api.logs.mapper.toLog
+import site.geniyz.otus.common.CorSettings
 
 import site.geniyz.otus.common.helpers.asAppError
 import site.geniyz.otus.common.helpers.fail
 
-class AppProcessor {
+class AppProcessor(val settings: CorSettings) {
     suspend fun exec(ctx: AppContext){
-        AnyBusinessChain.exec(ctx)
-        when( ctx.command.name.substringBefore("_") ){
-            "OBJ" -> ObjBusinessChain.exec(ctx)
-            "TAG" -> TagBusinessChain.exec(ctx)
-            else  -> OtherBusinessChain.exec(ctx)
+        ctx.copy(settings = this@AppProcessor.settings).let { // учёт настроек
+            AnyBusinessChain.exec(it)
+            when (it.command.name.substringBefore("_")) {
+                "OBJ" -> ObjBusinessChain.exec(it)
+                "TAG" -> TagBusinessChain.exec(it)
+                else -> OtherBusinessChain.exec(it)
+            }
         }
     }
 
