@@ -26,8 +26,8 @@ class V1ObjInmemoryApiTest {
         requestId = "12345",
         obj = createObj,
         debug = ObjDebug(
-            mode = RequestDebugMode.STUB,
-            stub = ObjRequestDebugStubs.SUCCESS
+            mode = RequestDebugMode.TEST,
+            // stub = ObjRequestDebugStubs.SUCCESS
         )
     )
     @Test

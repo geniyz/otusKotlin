@@ -14,7 +14,7 @@ fun ICorChainDsl<AppContext>.initRepo(title: String) = worker {
     """.trimIndent()
     handle {
         repo = when {
-            workMode == AppWorkMode.TEST -> repo
+            workMode == AppWorkMode.TEST -> settings.repoTest
             workMode == AppWorkMode.STUB -> settings.repoStub
             else -> settings.repoProd
         }

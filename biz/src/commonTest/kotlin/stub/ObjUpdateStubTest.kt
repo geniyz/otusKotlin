@@ -5,9 +5,9 @@ import kotlinx.coroutines.test.runTest
 
 import site.geniyz.otus.biz.AppProcessor
 import site.geniyz.otus.common.AppContext
+import site.geniyz.otus.common.CorSettings
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.stubs.AppStubs
-import site.geniyz.otus.stubs.AppStubObjs
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -15,7 +15,7 @@ import kotlin.test.assertEquals
 @OptIn(ExperimentalCoroutinesApi::class)
 class ObjUpdateStubTest {
 
-    private val processor = AppProcessor()
+    private val processor = AppProcessor(CorSettings())
     val id = AppObjId("777")
     val name = "name 666"
     val content = "content 666"

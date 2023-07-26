@@ -12,7 +12,7 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level[%marker] %logger{36} - %msg%n%mdc%n</pattern>
         </encoder>
     </appender>
-
+    <!--
     <appender name="fluentd" class="ch.qos.logback.more.appenders.DataFluentAppender">
         <tag>app.logs</tag><label>normal</label>
         <remoteHost>${LOGS_FB_HOSTS}</remoteHost><port>${LOGS_FB_PORT}</port>
@@ -25,12 +25,17 @@
             </providers>
         </encoder>
     </appender>
-
+    -->
     <logger name="site.geniyz" level="${LOG_LEVEL}" additivity="false">
         <appender-ref ref="fluentd"/>
         <appender-ref ref="STDOUT"/>
     </logger>
-    <logger name="Application" level="INFO"><appender-ref ref="STDOUT"/></logger>
-    <root level="${LOG_LEVEL}"><appender-ref ref="fluentd"/><appender-ref ref="STDOUT"/></root>
+    <logger name="Application" level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="fluentd"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
 </configuration>
 

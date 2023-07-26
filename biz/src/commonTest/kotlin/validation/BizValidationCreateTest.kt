@@ -4,6 +4,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.test.Test
 
 import site.geniyz.otus.biz.*
+import site.geniyz.otus.common.CorSettings
 import site.geniyz.otus.common.models.*
 
 
@@ -11,7 +12,7 @@ import site.geniyz.otus.common.models.*
 class BizValidationObjCreateTest {
 
     private val command = AppCommand.OBJ_CREATE
-    private val processor by lazy { AppProcessor() }
+    private val processor by lazy { AppProcessor(CorSettings()) }
 
     @Test fun correctObjName()    = validationObjNameCorrect(command, processor)
     @Test fun trimObjName()       = validationObjNameTrim(command, processor)
