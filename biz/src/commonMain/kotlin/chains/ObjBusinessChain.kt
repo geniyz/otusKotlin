@@ -77,11 +77,14 @@ val ObjBusinessChain: ICorExec<AppContext>
                     validation {
                         worker("Копируем поля в objValidating") { objValidating = objRequest.copy() }
                         worker("Очистка id") { objValidating.id = AppObjId.NONE }
+                        worker("Очистка lock") { objValidating.lock = AppLock(objValidating.lock.asString().trim()) }
                         worker("Очистка заголовка") { objValidating.name = objValidating.name.trim() }
                         worker("Очистка описания") { objValidating.content = objValidating.content.trim() }
 
                         validateObjIdNotEmpty("Проверка на непустой id")
                         validateObjIdProperFormat("Проверка формата id")
+                        validateLockNotEmpty("Проверка на непустой lock")
+                        validateLockProperFormat("Проверка формата lock")
                         validateObjNameNotEmpty("Проверка, что заголовок не пуст")
                         validateObjNameHasContent("Проверка символов")
                         validateObjContentNotEmpty("Проверка, что описание не пусто")
@@ -101,9 +104,12 @@ val ObjBusinessChain: ICorExec<AppContext>
                     validation {
                         worker("Копируем поля в objValidating") { objValidating = objRequest.copy() }
                         worker("Очистка id") { objValidating.id = AppObjId(objValidating.id.asString().trim()) }
+                        worker("Очистка lock") { objValidating.lock = AppLock(objValidating.lock.asString().trim()) }
 
                         validateObjIdNotEmpty("Проверка на непустой id")
                         validateObjIdProperFormat("Проверка формата id")
+                        validateLockNotEmpty("Проверка на непустой lock")
+                        validateLockProperFormat("Проверка формата lock")
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
@@ -154,9 +160,12 @@ val ObjBusinessChain: ICorExec<AppContext>
                         worker("Копируем метки в tagsValidating") { tagsValidating = tagsRequest.toMutableList() }
 
                         worker("Очистка id") { objValidating.id = AppObjId(objValidating.id.asString().trim()) }
+                        worker("Очистка lock") { objValidating.lock = AppLock(objValidating.lock.asString().trim()) }
 
                         validateObjIdNotEmpty("Проверка на непустой id")
                         validateObjIdProperFormat("Проверка формата id")
+                        validateLockNotEmpty("Проверка на непустой lock")
+                        validateLockProperFormat("Проверка формата lock")
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }

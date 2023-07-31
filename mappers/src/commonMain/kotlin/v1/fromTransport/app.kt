@@ -22,3 +22,5 @@ fun AppContext.fromTransport(request: IRequest) = when (request) {
 }
 
 fun IRequest?.requestId() = this?.requestId?.let { AppRequestId(it) } ?: AppRequestId.NONE
+
+fun String?.toAppLock() = this?.let { AppLock(it) } ?: AppLock.NONE

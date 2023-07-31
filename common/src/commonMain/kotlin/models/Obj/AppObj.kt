@@ -14,4 +14,11 @@ data class AppObj(
 
     var lock:      AppLock    = AppLock.NONE,      // идентификатор версии объекта для позитивной блокировки
 
-)
+){
+    fun isEmpty() = this == NONE
+
+    companion object {
+        val NONE = AppObj()
+    }
+
+}

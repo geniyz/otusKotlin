@@ -51,6 +51,7 @@ class V1ObjInmemoryApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            contentType(ContentType.Application.Json)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -68,6 +69,7 @@ class V1ObjInmemoryApiTest {
             name = "Объект",
             content = "Новое описание",
             objType = ObjType.TEXT,
+            lock = initObject.obj?.lock,
         )
 
         val response = client.post("/v1/obj/update") {
@@ -94,10 +96,11 @@ class V1ObjInmemoryApiTest {
     fun delete() = testApplication {
         val initObject = initObject(client)
         val id = initObject.obj?.id
+        val lock = initObject.obj?.lock
         val response = client.post("/v1/obj/delete") {
             val requestObj = ObjDeleteRequest(
                 requestId = "12345",
-                obj = ObjDeleteObject(id),
+                obj = ObjDeleteObject(id, lock),
                 debug = ObjDebug(
                     mode = RequestDebugMode.TEST,
                 )
@@ -136,7 +139,9 @@ class V1ObjInmemoryApiTest {
 
     @Test
     fun setTags() = testApplication {
-        val objId = initObject(client).obj?.id
+        val initObject = initObject(client)
+        val objId = initObject.obj?.id
+        val objLock = initObject.obj?.lock
         val newTags = listOf("метка", "тэг", "тег")
         val response = client.post("/v1/obj/setTags") {
             val requestObj = ObjSetTagsRequest(
@@ -144,6 +149,7 @@ class V1ObjInmemoryApiTest {
                 obj = ObjSetTagsObject(
                     id = objId,
                     tags = newTags,
+                    lock = objLock,
                 ),
                 debug = ObjDebug(
                     mode = RequestDebugMode.TEST,

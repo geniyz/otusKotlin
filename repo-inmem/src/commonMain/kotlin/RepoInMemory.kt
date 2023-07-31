@@ -299,9 +299,9 @@ class RepoInMemory(
     }
 
     override suspend fun searchTags(rq: DbLnkFilterRequest): DbTagsResponse {
-        val result = cacheLinksObj.get(rq.obj)?.map{
+        val result = cacheLinksObj.get(rq.obj)?.mapNotNull {
             cacheTags.get(it)?.toInternal()
-        }?.filterNotNull()
+        }
         return DbTagsResponse(
             data = result,
             isSuccess = true
@@ -309,9 +309,9 @@ class RepoInMemory(
     }
 
     override suspend fun searchObjs(rq: DbLnkFilterRequest): DbObjsResponse {
-        val result = cacheLinksTag.get(rq.obj)?.map{
+        val result = cacheLinksTag.get(rq.tag)?.mapNotNull {
             cacheObjs.get(it)?.toInternal()
-        }?.filterNotNull()
+        }
         return DbObjsResponse(
             data = result,
             isSuccess = true

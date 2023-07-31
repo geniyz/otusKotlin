@@ -448,6 +448,8 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/ObjId'
+        lock:
+          $ref: '#/components/schemas/Lock'
         tags:
           type: array
           items:

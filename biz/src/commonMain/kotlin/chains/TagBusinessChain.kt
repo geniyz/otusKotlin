@@ -11,7 +11,7 @@ import site.geniyz.otus.biz.validation.*
 
 val TagBusinessChain: ICorExec<AppContext>
     get() = rootChain<AppContext> {
-                operation("Удалить сущность", AppCommand.TAG_DELETE) {
+                operation("Удалить метку", AppCommand.TAG_DELETE) {
                     stubs("Обработка стабов") {
                         stubTagDeleteSuccess("Имитация успешной обработки")
                         stubTagValidationBadId("Имитация ошибки валидации id")
@@ -22,9 +22,12 @@ val TagBusinessChain: ICorExec<AppContext>
                     validation {
                         worker("Копируем поля в tagValidating") { tagValidating = tagRequest.copy() }
                         worker("Очистка id") { tagValidating.id = AppTagId(tagValidating.id.asString().trim()) }
+                        worker("Очистка lock") { tagValidating.lock = AppLock(tagValidating.lock.asString().trim()) }
 
                         validateTagIdNotEmpty("Проверка на непустой id")
                         validateTagIdProperFormat("Проверка формата id")
+                        validateLockNotEmpty("Проверка на непустой lock")
+                        validateLockProperFormat("Проверка формата lock")
 
                         finishTagValidation("Успешное завершение процедуры валидации")
                     }

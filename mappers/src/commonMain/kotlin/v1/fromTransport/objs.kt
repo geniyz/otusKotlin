@@ -100,7 +100,17 @@ private fun ObjUpdateObject.toInternal() = AppObj(
     name = this.name ?: "",
     content = this.content ?: "",
     objType = this.objType.fromTransport(),
+    lock = this.lock.toAppLock(),
 )
+
+private fun ObjDeleteObject?.toInternal(): AppObj = if (this != null) {
+    AppObj(
+        id = id.toObjId(),
+        lock = lock.toAppLock(),
+    )
+} else {
+    AppObj.NONE
+}
 
 private fun ObjType?.fromTransport(): AppObjType = when (this) {
     ObjType.TEXT   -> AppObjType.TEXT

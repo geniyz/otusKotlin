@@ -30,5 +30,6 @@ include(
 
     // "repo-stubs",
     "repo-tests",
-    "repo-inmem",
+    "repo-inmem", // хранишлище впамяти
+    "repo-sql",   // хранилище в РСУБД
     )

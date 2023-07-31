@@ -52,3 +52,12 @@ fun AppContext.fromTransport(request: TagListObjsRequest) {
 private fun TagSearchFilter?.toInternal() = AppTagFilter(
     searchString = this?.searchString ?: ""
 )
+
+private fun TagDeleteObject?.toInternal(): AppTag = if (this != null) {
+    AppTag(
+        id = id.toTagId(),
+        lock = lock.toAppLock(),
+    )
+} else {
+    AppTag.NONE
+}

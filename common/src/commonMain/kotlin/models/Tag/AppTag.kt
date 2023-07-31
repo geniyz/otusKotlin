@@ -12,4 +12,11 @@ data class AppTag(
     var objQty:    Int      = 0,              // кол-во объектов с такой меткою
 
     var lock:      AppLock  = AppLock.NONE,   // идентификатор версии метки для позитивной блокировки
-)
+){
+    fun isEmpty() = this == NONE
+
+    companion object {
+        val NONE = AppTag()
+    }
+
+}
