@@ -10,11 +10,11 @@ fun ICorChainDsl<AppContext>.prepareResult(title: String) = worker {
     description = "Подготовка данных для ответа клиенту на запрос"
     on { workMode != AppWorkMode.STUB }
     handle {
-        objResponse = objRepoDone
-        objsResponse = objsRepoDone
+        if(objRepoDone != AppObj.NONE) objResponse = objRepoDone
+        if(objsRepoDone.isNotEmpty() ) objsResponse = objsRepoDone
 
-        tagResponse = tagRepoDone
-        tagsResponse = tagsRepoDone
+        if(tagRepoDone != AppTag.NONE) tagResponse = tagRepoDone
+        if(tagsRepoDone.isNotEmpty() ) tagsResponse = tagsRepoDone
 
         state = when (val st = state) {
             AppState.RUNNING -> AppState.FINISHING

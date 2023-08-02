@@ -183,10 +183,36 @@ Content-Type: application/json
 {
   "requestId": "40",
   "obj": {
-    "id": "36b58040-23c3-424f-a442-0b3a7414e527",
-    "lock": "d152845c-2697-4ae5-bea4-039a092c2058",
+    "id": "8eab3298-0d7a-4c59-b47e-ab397cd59f65",
+    "lock": "b5c2ccec-2929-4fef-9e65-1389ce4e6c21",
     "tags": [
       "tag1", "tag2", "tag3"
+    ]
+  }
+}
+
+### list tags by obj
+POST http://127.0.0.1:8088/v1/obj/listTags
+Content-Type: application/json
+
+{
+  "requestId": "50",
+  "obj": {
+    "id": "8eab3298-0d7a-4c59-b47e-ab397cd59f65"
+  }
+}
+
+###  reset tags for obj
+POST http://127.0.0.1:8088/v1/obj/setTags
+Content-Type: application/json
+
+{
+  "requestId": "60",
+  "obj": {
+    "id": "8eab3298-0d7a-4c59-b47e-ab397cd59f65",
+    "lock": "b5c2ccec-2929-4fef-9e65-1389ce4e6c21",
+    "tags": [
+      "tag2", "tag3", "tag4", "tag5"
     ]
   }
 }

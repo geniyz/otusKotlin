@@ -236,13 +236,31 @@ class RepoSQL(
         transactionWrapper({
             LnkTable.deleteWhere { LnkTable.obj eq rq.id.asString() }
 
-                rq.tags.forEach { t ->
-                    LnkTable.insert {
-                        it[id] = randomUuid()
-                        it[obj] = rq.id.asString()
-                        it[tag] = t.id.asString()
+            rq.tags.forEach { t ->
+                val tagCur = TagTable.select(TagTable.code eq t.code)
+
+                val tagId = if( 0L == tagCur.count() ){ // если нет такой метки — создать:
+                    val res = TagTable.insert {
+                        to(it,
+                            t.copy(
+                                code      = t.code,
+                                name      = t.code,
+                                createdAt = Clock.System.now(),
+                                updatedAt = Clock.System.now(),
+                            ),
+                            randomUuid)
                     }
+                    TagTable.from(res).id.asString()
+                }else {
+                    tagCur.first()[TagTable.id]
                 }
+
+                LnkTable.insert {
+                    it[id] = randomUuid()
+                    it[obj] = rq.id.asString()
+                    it[tag] = tagId
+                }
+            }
 
             val res = (TagTable innerJoin LnkTable).select(LnkTable.obj eq rq.id.asString())
             DbTagsResponse(data = res.map { TagTable.from(it) }, isSuccess = true)
