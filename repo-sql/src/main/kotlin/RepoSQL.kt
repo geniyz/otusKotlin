@@ -1,6 +1,7 @@
 package site.geniyz.otus.backend.repo.sql
 
 import com.benasher44.uuid.uuid4
+import kotlinx.datetime.Clock
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -57,7 +58,12 @@ class RepoSQL(
     // Objects
     private fun createObj(o: AppObj): AppObj {
         val res = ObjTable.insert {
-            to(it, o, randomUuid)
+            to(it,
+                o.copy(
+                createdAt = Clock.System.now(),
+                updatedAt = Clock.System.now(),
+                ),
+                randomUuid)
         }
         return ObjTable.from(res)
     }
@@ -100,7 +106,7 @@ class RepoSQL(
     override suspend fun updateObj(rq: DbObjRequest): DbObjResponse =
         updateObj(rq.obj.id, rq.obj.lock) {
             ObjTable.update({ ObjTable.id eq rq.obj.id.asString() }) {
-                to(it, rq.obj, randomUuid)
+                to(it, rq.obj.copy(updatedAt = Clock.System.now()), randomUuid)
             }
             readObj(rq.obj.id)
         }

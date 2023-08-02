@@ -1,5 +1,6 @@
 package site.geniyz.otus.backend.repo.sql
 
+import kotlinx.datetime.Clock
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.kotlin.datetime.CurrentTimestamp
@@ -52,7 +53,7 @@ object ObjTable : Table("objects") {
         it[lock]      = o.lock.takeIf { it != AppLock.NONE }?.asString() ?: randomUuid()
 
         it[createdAt] = o.createdAt
-        it[updatedAt] = CurrentTimestamp()
+        it[updatedAt] = Clock.System.now()
     }
 
 }
