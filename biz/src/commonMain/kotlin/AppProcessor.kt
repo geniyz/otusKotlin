@@ -13,7 +13,7 @@ import site.geniyz.otus.common.CorSettings
 import site.geniyz.otus.common.helpers.asAppError
 import site.geniyz.otus.common.helpers.fail
 
-class AppProcessor(val settings: CorSettings) {
+class AppProcessor(private val settings: CorSettings) {
     suspend fun exec(ctx: AppContext){
             AnyBusinessChain.exec(ctx)
             when (ctx.command.name.substringBefore("_")) {

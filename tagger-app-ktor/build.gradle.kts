@@ -84,7 +84,6 @@ kotlin {
                 implementation(project(":lib-log-kermit"))
 
                 implementation(project(":repo-inmem"))
-                // implementation(project(":repo-stubs"))
 
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
@@ -95,6 +94,8 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":lib-log-logback"))
+
+                implementation(project(":repo-sql")) // тут используется jdbc, так что только jvm
 
                 implementation("com.sndyuk:logback-more-appenders:1.8.8")
                 implementation("org.fluentd:fluent-logger:0.3.4")

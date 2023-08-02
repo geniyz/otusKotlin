@@ -2,7 +2,40 @@
 
 version: '3'
 services:
-  app-ktor:
-    image: tagger-app-ktor-ktor:0.0.1-SNAPSHOT
+  psql:
+    image: postgres
+    container_name: postgresql
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "8080:8080"
+      - "5432:5432"
+    expose:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER:     postgres
+      POSTGRES_DB:       otus
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout:  5s
+      retries:  5
+
+  app:
+    image: tagger-app-ktor-ktor:0.0.1-SNAPSHOT
+    container_name: tagger-app-ktor
+    ports:
+      - "8088:8088"
+    expose:
+      - "8088"
+    environment:
+      SQL_URL:    jdbc:postgresql://psql:5432/otus
+      SQL_PASS:   pass
+      SQL_USER:   postgres
+      SQL_SCHEMA: otus
+    depends_on:
+      psql:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

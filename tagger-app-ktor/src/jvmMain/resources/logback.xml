@@ -33,6 +33,10 @@
     <logger name="Application" level="INFO">
         <appender-ref ref="STDOUT"/>
     </logger>
+    <logger name="Exposed" level="debug">
+        <appender-ref ref="fluentd"/>
+        <appender-ref ref="STDOUT" />
+    </logger>
     <root level="${LOG_LEVEL}">
         <appender-ref ref="fluentd"/>
         <appender-ref ref="STDOUT"/>

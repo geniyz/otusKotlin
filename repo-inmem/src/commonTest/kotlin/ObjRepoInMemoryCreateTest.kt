@@ -1,4 +1,4 @@
-package site.geniyz.otus.backend.repository.inmemory
+package site.geniyz.otus.backend.repo.inmemory
 
 import site.geniyz.otus.backend.repo.tests.*
 

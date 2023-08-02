@@ -63,6 +63,11 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chain {
+                        title = "Логика считывания данных объекта"
+                        repoObjRead("Получение объекта в БД")
+                    }
+                    prepareResult("Подготовка ответа")
                 }
                 operation("Изменить сущность", AppCommand.OBJ_UPDATE) {
                     stubs("Обработка стабов") {
@@ -92,6 +97,12 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Завершение проверок")
                     }
+                    chain {
+                        title = "Логика корректировки данных"
+                        repoObjPrepareUpdate("Подготовка к корректировке данных объекта в БД")
+                        repoObjUpdate ("Изменение объекта в БД")
+                    }
+                    prepareResult("Подготовка ответа")
                 }
                 operation("Удалить сущность", AppCommand.OBJ_DELETE) {
                     stubs("Обработка стабов") {
@@ -113,6 +124,12 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chain {
+                        title = "Логика Удаления данных"
+                        repoObjPrepareDelete("Подготовка к удалению объекта из БД")
+                        repoObjDelete("Удаление объекта из БД")
+                    }
+                    prepareResult("Подготовка ответа")
                 }
                 operation("Поиск сущности", AppCommand.OBJ_SEARCH) {
                     stubs("Обработка стабов") {
@@ -127,6 +144,11 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjFilterValidation("Успешное завершение процедуры валидации")
                     }
+                    chain {
+                        title = "Логика поиска объектов"
+                        repoObjSearch("Поиск объектов из БД")
+                    }
+                    prepareResult("Подготовка ответа")
 
                 }
                 operation("Получение меток объекта", AppCommand.OBJ_LIST_TAGS) {
@@ -146,6 +168,11 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chain {
+                        title = "Логика получения меток объенкта"
+                        repoObjListTags("Получение меток объекта из БД")
+                    }
+                    prepareResult("Подготовка ответа")
                 }
                 operation("Изменение меток объекта", AppCommand.OBJ_SET_TAGS) {
                     stubs("Обработка стабов") {
@@ -169,5 +196,10 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chain {
+                        title = "Логика изменения меток объенкта"
+                        repoObjSetTags("Изменение меток объекта из БД")
+                    }
+                    prepareResult("Подготовка ответа")
                 }
             }.build()

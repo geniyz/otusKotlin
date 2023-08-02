@@ -1,10 +1,10 @@
-package site.geniyz.otus.backend.repository.inmemory
+package site.geniyz.otus.backend.repo.inmemory
 
 import com.benasher44.uuid.uuid4
 import io.github.reactivecircus.cache4k.Cache
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import site.geniyz.otus.backend.repository.inmemory.model.*
+import site.geniyz.otus.backend.repo.inmemory.model.*
 import site.geniyz.otus.common.helpers.errorRepoConcurrency
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.repo.*

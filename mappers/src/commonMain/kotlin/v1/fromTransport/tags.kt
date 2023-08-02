@@ -6,7 +6,7 @@ import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.stubs.AppStubs
 
 private fun String?.toTagId() = this?.let { AppTagId(it) } ?: AppTagId.NONE
-private fun String?.toTagWithId() = AppTag(id = this.toTagId())
+private fun String?.toTagWithId(lock: String? = "") = AppTag(id = this.toTagId(), lock = lock.toAppLock())
 
 private fun TagDebug?.transportToWorkMode(): AppWorkMode = when (this?.mode) {
     RequestDebugMode.PROD -> AppWorkMode.PROD
@@ -30,7 +30,7 @@ fun AppContext.fromTransport(request: TagDeleteRequest) {
     requestId = request.requestId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
-    tagRequest = request.tag?.id.toTagWithId()
+    tagRequest = request.tag?.id.toTagWithId( lock= request.tag?.lock )
 }
 
 fun AppContext.fromTransport(request: TagSearchRequest) {

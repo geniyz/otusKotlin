@@ -4,10 +4,10 @@ Content-Type: application/json
 
 {
   "requestType": "objCreate",
-  "requestId": "12345",
+  "requestId": "123456",
   "obj": {
-    "name": "Болт",
-    "content": "КРУТЕЙШИЙ",
+    "name": "зАПИСКА",
+    "content": "Входящая служебная записка",
     "objType": "text"
   },
   "debug": {
@@ -134,5 +134,59 @@ Content-Type: application/json
   },
   "debug": {
     "stub": "badSearchString"
+  }
+}
+
+
+
+
+### Create obj 1
+POST http://127.0.0.1:8088/v1/obj/create
+Content-Type: application/json
+
+{
+  "requestId": "10",
+  "obj": {
+    "name": "Тест 1",
+    "content": "Описание 1",
+    "objType": "text"
+  }
+}
+
+### Search obj 1
+POST http://localhost:8088/v1/obj/search
+Content-Type: application/json
+
+{
+  "requestId": "20",
+  "objFilter": {
+    "searchString": "Описание 1"
+  }
+}
+
+
+### get all objs
+POST http://localhost:8088/v1/obj/search
+Content-Type: application/json
+
+{
+  "requestId": "30",
+  "objFilter": {
+    "searchString": ""
+  }
+}
+
+### set tags for obj
+POST http://127.0.0.1:8088/v1/obj/setTags
+Content-Type: application/json
+
+{
+  "requestId": "40",
+  "obj": {
+    "id": "36b58040-23c3-424f-a442-0b3a7414e527",
+    "lock": "d152845c-2697-4ae5-bea4-039a092c2058",
+    "tags": [
+      "tag1", "tag2", "tag3"
+    ]
   }
 }

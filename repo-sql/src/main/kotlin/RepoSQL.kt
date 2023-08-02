@@ -54,8 +54,6 @@ class RepoSQL(
         }
 
 
-
-
     // Objects
     private fun createObj(o: AppObj): AppObj {
         val res = ObjTable.insert {
@@ -128,6 +126,7 @@ class RepoSQL(
                     }
                 }.reduce { a, b -> a and b }
             }
+            println(res)
             DbObjsResponse(data = res.map { ObjTable.from(it) }, isSuccess = true)
         }, {
             DbObjsResponse.error(it.asAppError())

@@ -1,4 +1,4 @@
-package site.geniyz.otus.backend.repository.inmemory.model
+package site.geniyz.otus.backend.repo.inmemory.model
 
 import kotlinx.datetime.Instant
 import site.geniyz.otus.common.NONE
