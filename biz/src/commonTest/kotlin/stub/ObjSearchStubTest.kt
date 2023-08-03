@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 
 import site.geniyz.otus.biz.AppProcessor
 import site.geniyz.otus.common.AppContext
+import site.geniyz.otus.common.CorSettings
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.stubs.AppStubs
 import site.geniyz.otus.stubs.AppStubObjs
@@ -17,7 +18,7 @@ import kotlin.test.fail
 @OptIn(ExperimentalCoroutinesApi::class)
 class ObjSearchStubTest {
 
-    private val processor = AppProcessor()
+    private val processor = AppProcessor(CorSettings())
     val filter = AppObjFilter(searchString = "blablabla")
 
     @Test

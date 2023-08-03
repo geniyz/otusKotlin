@@ -14,7 +14,7 @@ import site.geniyz.otus.common.models.*
 class BizValidationObjSearchTest {
 
     private val command = AppCommand.OBJ_SEARCH
-    private val processor by lazy { AppProcessor() }
+    private val processor by lazy { AppProcessor(CorSettings()) }
 
     @Test
     fun correctEmpty() = runTest {

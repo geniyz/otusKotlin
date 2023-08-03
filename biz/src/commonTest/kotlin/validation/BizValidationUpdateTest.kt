@@ -3,13 +3,14 @@ package site.geniyz.otus.biz.validation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.test.Test
 import site.geniyz.otus.biz.*
+import site.geniyz.otus.common.CorSettings
 import site.geniyz.otus.common.models.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class BizValidationObjUpdateTest {
 
     private val command = AppCommand.OBJ_UPDATE
-    private val processor by lazy { AppProcessor() }
+    private val processor by lazy { AppProcessor(CorSettings()) }
 
     @Test fun correctName()    = validationObjNameCorrect(command, processor)
     @Test fun trimName()       = validationObjNameTrim(command, processor)

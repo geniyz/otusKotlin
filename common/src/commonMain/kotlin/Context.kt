@@ -4,11 +4,14 @@ import kotlinx.datetime.Instant
 
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.stubs.AppStubs
+import site.geniyz.otus.common.repo.IRepository
 
 data class AppContext(
     var command: AppCommand = AppCommand.NONE,
     var state:   AppState   = AppState.NONE,
     val errors:  MutableList<AppError> = mutableListOf(),
+
+    var settings: CorSettings = CorSettings.NONE,
 
     var workMode: AppWorkMode = AppWorkMode.PROD,
     var stubCase: AppStubs    = AppStubs.NONE,
@@ -40,4 +43,16 @@ data class AppContext(
     var tagValidated:        AppTag              = AppTag(),
     var tagsValidated:       MutableList<AppTag> = mutableListOf(),
     var tagFilterValidated:  AppTagFilter        = AppTagFilter(),
+
+    var repo:                IRepository         = IRepository.NONE,
+
+    var objRepoPrepare:      AppObj              = AppObj(),
+    var objRepoRead:         AppObj              = AppObj(),
+    var objRepoDone:         AppObj              = AppObj(),
+    var objsRepoDone:        MutableList<AppObj> = mutableListOf(),
+
+    var tagRepoPrepare:      AppTag              = AppTag(),
+    var tagRepoRead:         AppTag              = AppTag(),
+    var tagRepoDone:         AppTag              = AppTag(),
+    var tagsRepoDone:        MutableList<AppTag> = mutableListOf(),
 )

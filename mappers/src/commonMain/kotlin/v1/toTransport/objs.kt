@@ -86,6 +86,7 @@ private fun AppObj.toTransport(): ObjResponseObject = ObjResponseObject(
     authorId = authorId.takeIf { it != AppUserId.NONE }?.asString(),
     createdAt = createdAt.takeIf { it != Instant.NONE }?.asString(),
     updatedAt = updatedAt.takeIf { it != Instant.NONE }?.asString(),
+    lock = lock.takeIf { it != AppLock.NONE }?.asString(),
 )
 
 private fun AppObjType.toTransport(): ObjType? = when (this) {

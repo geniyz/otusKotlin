@@ -83,6 +83,8 @@ kotlin {
                 implementation(project(":lib-log-common"))
                 implementation(project(":lib-log-kermit"))
 
+                implementation(project(":repo-inmem"))
+
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
@@ -92,6 +94,8 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":lib-log-logback"))
+
+                implementation(project(":repo-sql")) // тут используется jdbc, так что только jvm
 
                 implementation("com.sndyuk:logback-more-appenders:1.8.8")
                 implementation("org.fluentd:fluent-logger:0.3.4")
@@ -106,6 +110,8 @@ kotlin {
                 implementation(ktor("test-host"))
                 implementation(ktor("content-negotiation", prefix = "client-"))
                 implementation(ktor("websockets", prefix = "client-"))
+
+                implementation(project(":repo-tests"))
             }
         }
 

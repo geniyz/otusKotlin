@@ -44,7 +44,7 @@ class WSController {
 
             val jsonStr = frame.readText()
 
-            AppProcessor().process(
+            AppProcessor(appSettings.corSettings).process(
                 logger = logger,
                 logId = "webSocket",
                 command = AppCommand.NONE,

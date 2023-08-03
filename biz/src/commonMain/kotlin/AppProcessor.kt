@@ -8,18 +8,19 @@ import site.geniyz.otus.common.models.*
 import site.geniyz.otus.logging.common.*
 
 import site.geniyz.otus.api.logs.mapper.toLog
+import site.geniyz.otus.common.CorSettings
 
 import site.geniyz.otus.common.helpers.asAppError
 import site.geniyz.otus.common.helpers.fail
 
-class AppProcessor {
+class AppProcessor(private val settings: CorSettings) {
     suspend fun exec(ctx: AppContext){
-        AnyBusinessChain.exec(ctx)
-        when( ctx.command.name.substringBefore("_") ){
-            "OBJ" -> ObjBusinessChain.exec(ctx)
-            "TAG" -> TagBusinessChain.exec(ctx)
-            else  -> OtherBusinessChain.exec(ctx)
-        }
+            AnyBusinessChain.exec(ctx)
+            when (ctx.command.name.substringBefore("_")) {
+                "OBJ" -> ObjBusinessChain.exec(ctx)
+                "TAG" -> TagBusinessChain.exec(ctx)
+                else  -> OtherBusinessChain.exec(ctx)
+            }
     }
 
     suspend fun <T> process(
@@ -31,7 +32,8 @@ class AppProcessor {
 
         val ctx = AppContext(
             timeStart = Clock.System.now(),
-        )
+        ).copy(settings = this@AppProcessor.settings)
+
         var realCommand = command
 
         return try {

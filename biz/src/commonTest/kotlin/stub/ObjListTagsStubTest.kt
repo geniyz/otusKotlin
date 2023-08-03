@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 
 import site.geniyz.otus.biz.AppProcessor
 import site.geniyz.otus.common.AppContext
+import site.geniyz.otus.common.CorSettings
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.stubs.AppStubs
 
@@ -16,7 +17,7 @@ import kotlin.test.fail
 @OptIn(ExperimentalCoroutinesApi::class)
 class ObjOffersStubTest {
 
-    private val processor = AppProcessor()
+    private val processor = AppProcessor(CorSettings())
     val id = AppObjId("777")
 
     @Test

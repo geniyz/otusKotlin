@@ -44,5 +44,6 @@ private fun AppTag.toTransport(): TagResponseObject = TagResponseObject(
     id = id.takeIf { it != AppTagId.NONE }?.asString(),
     createdAt = createdAt.takeIf { it != Instant.NONE }?.asString(),
     updatedAt = updatedAt.takeIf { it != Instant.NONE }?.asString(),
-    objQty    = objQty
+    objQty    = objQty,
+    lock = lock.takeIf { it != AppLock.NONE }?.asString(),
 )

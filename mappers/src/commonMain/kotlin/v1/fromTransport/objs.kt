@@ -6,7 +6,7 @@ import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.stubs.AppStubs
 
 private fun String?.toObjId() = this?.let { AppObjId(it) } ?: AppObjId.NONE
-private fun String?.toObjWithId() = AppObj(id = this.toObjId())
+private fun String?.toObjWithId(lock: String? = "") = AppObj(id = this.toObjId(), lock = lock.toAppLock())
 
 private fun ObjDebug?.transportToWorkMode(): AppWorkMode = when (this?.mode) {
     RequestDebugMode.PROD -> AppWorkMode.PROD
@@ -57,7 +57,7 @@ fun AppContext.fromTransport(request: ObjDeleteRequest) {
     requestId = request.requestId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
-    objRequest = request.obj?.id.toObjWithId()
+    objRequest = request.obj?.id.toObjWithId( lock= request.obj?.lock )
 }
 
 fun AppContext.fromTransport(request: ObjSearchRequest) {
@@ -81,7 +81,7 @@ fun AppContext.fromTransport(request: ObjSetTagsRequest) {
     requestId = request.requestId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
-    objRequest = request.obj?.id.toObjWithId()
+    objRequest = request.obj?.id.toObjWithId( lock= request.obj?.lock )
     tagsRequest = request.obj?.tags?.map { AppTag(code = it) }?.toMutableList() ?: mutableListOf()
 }
 
@@ -100,7 +100,17 @@ private fun ObjUpdateObject.toInternal() = AppObj(
     name = this.name ?: "",
     content = this.content ?: "",
     objType = this.objType.fromTransport(),
+    lock = this.lock.toAppLock(),
 )
+
+private fun ObjDeleteObject?.toInternal(): AppObj = if (this != null) {
+    AppObj(
+        id = id.toObjId(),
+        lock = lock.toAppLock(),
+    )
+} else {
+    AppObj.NONE
+}
 
 private fun ObjType?.fromTransport(): AppObjType = when (this) {
     ObjType.TEXT   -> AppObjType.TEXT

@@ -322,6 +322,10 @@ components:
       type: string
       description: Идентификатор метки
 
+    Lock:
+      type: string
+      description: Идентификатор оптимистичной блокировки
+
     BaseObj:
       type: object
       description: Объект описывает свойства, одинаковые для create и update
@@ -381,6 +385,8 @@ components:
           properties:
             id:
               $ref: '#/components/schemas/ObjId'
+            lock:
+              $ref: '#/components/schemas/Lock'
     ObjUpdateRequest:
       allOf:
         - $ref: '#/components/schemas/IRequest'
@@ -396,6 +402,8 @@ components:
           properties:
             id:
               $ref: '#/components/schemas/ObjId'
+            lock:
+              $ref: '#/components/schemas/Lock'
     ObjDeleteRequest:
       allOf:
         - $ref: '#/components/schemas/IRequest'
@@ -440,6 +448,8 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/ObjId'
+        lock:
+          $ref: '#/components/schemas/Lock'
         tags:
           type: array
           items:
@@ -459,6 +469,8 @@ components:
           properties:
             id:
               $ref: '#/components/schemas/TagId'
+            lock:
+              $ref: '#/components/schemas/Lock'
     TagDeleteRequest:
       allOf:
         - $ref: '#/components/schemas/IRequest'
@@ -515,6 +527,8 @@ components:
               $ref: '#/components/schemas/CreatedAt'
             updatedAt:
               $ref: '#/components/schemas/UpdatedAt'
+            lock:
+              $ref: '#/components/schemas/Lock'
 
     ObjResponseSingle:
       allOf:
@@ -612,6 +626,8 @@ components:
               $ref: '#/components/schemas/CreatedAt'
             updatedAt:
               $ref: '#/components/schemas/UpdatedAt'
+            lock:
+              $ref: '#/components/schemas/Lock'
 
     TagResponseSingle:
       allOf:

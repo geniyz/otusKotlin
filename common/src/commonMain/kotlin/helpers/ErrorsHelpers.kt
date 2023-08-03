@@ -1,6 +1,7 @@
 package site.geniyz.otus.common.helpers
 
 import site.geniyz.otus.common.AppContext
+import site.geniyz.otus.common.exceptions.RepoConcurrencyException
 import site.geniyz.otus.common.models.*
 
 fun Throwable.asAppError(
@@ -38,4 +39,43 @@ fun errorValidation(
     group   = "validation" + if(segment.isNotBlank()){"-$segment"}else{""},
     message = "Validation error for field $field: $description",
     level   = level,
+)
+
+
+fun errorRepoConcurrency(
+    expectedLock: AppLock,
+    actualLock: AppLock?,
+    exception: Exception? = null,
+) = AppError(
+    field = "lock",
+    code = "concurrency",
+    group = "repo",
+    message = "The object has been changed concurrently by another user or process",
+    exception = exception ?: RepoConcurrencyException(expectedLock, actualLock),
+)
+
+val errorNotFound = AppError(
+    field = "id",
+    message = "Нет подходящих данных",
+    code = "not-found"
+)
+
+val errorEmptyId = AppError(
+    field = "id",
+    message = "Идентификатор должен быть не пустым"
+)
+
+fun errorAdministration(
+    field: String = "",
+    violationCode: String,
+    description: String,
+    exception: Exception? = null,
+    level: AppError.Level = AppError.Level.ERROR,
+) = AppError(
+    field = field,
+    code = "administration-$violationCode",
+    group = "administration",
+    message = "Microservice management error: $description",
+    level = level,
+    exception = exception,
 )
