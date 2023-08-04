@@ -12,8 +12,8 @@ fun ICorChainDsl<AppContext>.repoObjListTags(title: String) = worker {
     on { state == AppState.RUNNING }
     handle {
         val request = DbLnkFilterRequest(
-            obj = objValidated.id.asString(),
-            ownerId = objValidated.authorId,
+            obj = objRepoRead.id.asString(), // objValidated.id.asString(),
+            ownerId = objRepoRead.authorId,  // objValidated.authorId,
         )
         val result = repo.searchTags(request)
         val resultObj = result.data

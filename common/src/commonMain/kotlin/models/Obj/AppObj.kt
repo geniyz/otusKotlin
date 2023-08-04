@@ -2,6 +2,7 @@ package site.geniyz.otus.common.models
 
 import kotlinx.datetime.Instant
 import site.geniyz.otus.common.NONE
+import site.geniyz.otus.common.permissions.AppPrincipalRelations
 
 data class AppObj(
     var id:        AppObjId   = AppObjId.NONE,
@@ -14,6 +15,8 @@ data class AppObj(
 
     var lock:      AppLock    = AppLock.NONE,      // идентификатор версии объекта для позитивной блокировки
 
+    var principalRelations: Set<AppPrincipalRelations>         = emptySet(),       // отношения текущего пользователя к данному объекту
+    var permissionsClient:  MutableSet<AppObjPermissionClient> = mutableSetOf()    // права текущего пользователя на действия с данным объектом
 ){
     fun isEmpty() = this == NONE
 

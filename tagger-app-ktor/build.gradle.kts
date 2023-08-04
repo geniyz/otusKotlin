@@ -97,6 +97,9 @@ kotlin {
 
                 implementation(project(":repo-sql")) // тут используется jdbc, так что только jvm
 
+                implementation(ktor("auth"))
+                implementation(ktor("auth-jwt"))
+
                 implementation("com.sndyuk:logback-more-appenders:1.8.8")
                 implementation("org.fluentd:fluent-logger:0.3.4")
             }
