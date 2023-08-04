@@ -81,7 +81,7 @@ val ObjBusinessChain: ICorExec<AppContext>
                     }
                     validation {
                         worker("Копируем поля в objValidating") { objValidating = objRequest.copy() }
-                        worker("Очистка id") { objValidating.id = AppObjId.NONE }
+                        worker("Очистка id") { objValidating.id = AppObjId(objValidating.id.asString().trim()) }
                         worker("Очистка lock") { objValidating.lock = AppLock(objValidating.lock.asString().trim()) }
                         worker("Очистка заголовка") { objValidating.name = objValidating.name.trim() }
                         worker("Очистка описания") { objValidating.content = objValidating.content.trim() }

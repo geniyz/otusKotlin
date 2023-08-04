@@ -15,12 +15,14 @@ import site.geniyz.otus.common.helpers.fail
 
 class AppProcessor(private val settings: CorSettings) {
     suspend fun exec(ctx: AppContext){
-            AnyBusinessChain.exec(ctx)
-            when (ctx.command.name.substringBefore("_")) {
-                "OBJ" -> ObjBusinessChain.exec(ctx)
-                "TAG" -> TagBusinessChain.exec(ctx)
-                else  -> OtherBusinessChain.exec(ctx)
-            }
+        val x = ctx.apply{ this.settings = this@AppProcessor.settings }
+
+        AnyBusinessChain.exec(x)
+        when (x.command.name.substringBefore("_")) {
+            "OBJ" -> ObjBusinessChain.exec(x)
+            "TAG" -> TagBusinessChain.exec(x)
+            else -> OtherBusinessChain.exec(x)
+        }
     }
 
     suspend fun <T> process(
@@ -32,7 +34,7 @@ class AppProcessor(private val settings: CorSettings) {
 
         val ctx = AppContext(
             timeStart = Clock.System.now(),
-        ).copy(settings = this@AppProcessor.settings)
+        )//.copy(settings = this@AppProcessor.settings)
 
         var realCommand = command
 

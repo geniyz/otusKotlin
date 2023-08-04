@@ -13,9 +13,9 @@ fun ICorChainDsl<AppContext>.initRepo(title: String) = worker {
         Вычисление основного рабочего репозитория в зависимости от запрошенного режима работы        
     """.trimIndent()
     handle {
-        repo = when {
-            workMode == AppWorkMode.TEST -> settings.repoTest
-            workMode == AppWorkMode.STUB -> settings.repoStub
+        repo = when (workMode) {
+            AppWorkMode.TEST -> settings.repoTest
+            AppWorkMode.STUB -> settings.repoStub
             else -> settings.repoProd
         }
         if (workMode != AppWorkMode.STUB && repo == IRepository.NONE) fail(

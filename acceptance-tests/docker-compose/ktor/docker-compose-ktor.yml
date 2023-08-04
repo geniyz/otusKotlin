@@ -1,4 +1,4 @@
-# Конфигурация для ktor + (в перспективе) postgresql
+# Конфигурация для ktor + postgresql
 
 version: '3'
 services:
