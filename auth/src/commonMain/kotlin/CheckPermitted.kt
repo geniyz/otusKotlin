@@ -46,6 +46,18 @@ private val accessTable = mapOf(
         relation   = AppPrincipalRelations.PUBLIC,
     ) to true,
 
+    // list tags
+    AccessTableConditions(
+        command    = AppCommand.OBJ_LIST_TAGS,
+        permission = AppUserPermissions.OBJ_READ_OWN,
+        relation   = AppPrincipalRelations.OWN,
+    ) to true,
+    AccessTableConditions(
+        command    = AppCommand.OBJ_LIST_TAGS,
+        permission = AppUserPermissions.OBJ_READ_PUBLIC,
+        relation   = AppPrincipalRelations.PUBLIC,
+    ) to true,
+
     // Update
     AccessTableConditions(
         command    = AppCommand.OBJ_UPDATE,

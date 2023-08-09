@@ -18,14 +18,13 @@ fun resolveFrontPermissions(
     .toSet()
 
 private val accessTable = mapOf(
-    /* // READ
+    // READ
     AppUserPermissions.OBJ_READ_OWN to mapOf(
         AppPrincipalRelations.OWN to AppObjPermissionClient.READ
     ),
     AppUserPermissions.OBJ_READ_PUBLIC to mapOf(
         AppPrincipalRelations.PUBLIC to AppObjPermissionClient.READ
     ),
-    */
 
     // UPDATE
     AppUserPermissions.OBJ_UPDATE_OWN to mapOf(

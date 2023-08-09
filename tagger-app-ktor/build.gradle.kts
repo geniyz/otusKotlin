@@ -118,6 +118,16 @@ kotlin {
             }
         }
 
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation(ktor("test-host")) // "io.ktor:ktor-server-test-host:$ktorVersion"
+                implementation(ktor("content-negotiation", prefix = "client-"))
+                implementation(ktor("websockets", prefix = "client-"))
+            }
+        }
+
+
     }
 }
 

@@ -10,6 +10,8 @@ import kotlinx.serialization.encodeToString
 
 import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.api.v1.models.*
+import site.geniyz.otus.app.auth.AuthConfig
+import site.geniyz.otus.app.auth.addAuth
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -51,7 +53,7 @@ class V1ObjInmemoryApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
-            contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -81,6 +83,7 @@ class V1ObjInmemoryApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -106,6 +109,7 @@ class V1ObjInmemoryApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -127,6 +131,7 @@ class V1ObjInmemoryApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -156,6 +161,7 @@ class V1ObjInmemoryApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -180,6 +186,7 @@ class V1ObjInmemoryApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }

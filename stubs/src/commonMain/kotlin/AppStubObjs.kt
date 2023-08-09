@@ -11,9 +11,16 @@ object AppStubObjs {
             name      = "Текст1",             // наименование
             content   = "Какой-то тест",      // содержимое
             objType   = AppObjType.TEXT,      // тип объекта
-            authorId  = AppUserId.NONE,       // автор-владелец
+            authorId  = AppUserId("000"),  // автор-владелец
             createdAt = Clock.System.now(),   // дата-время создания
             updatedAt = Instant.NONE,         // дата-время последнего изменения
+            lock      = AppLock("123-234-abc-ABC"),
+            permissionsClient = mutableSetOf(
+                AppObjPermissionClient.READ,
+                AppObjPermissionClient.UPDATE,
+                AppObjPermissionClient.SET_TAGS,
+                AppObjPermissionClient.DELETE,
+            ),
         )
     private val OBJ_HREF1 = OBJ_TEXT1.copy(
         id        = AppObjId("obj-href-0000"),

@@ -22,22 +22,12 @@ suspend inline fun <reified Q : IRequest, @Suppress("unused") reified R : IRespo
 ) {
     appSettings.processor.process(logger, logId, command,
         {ctx ->
-            val request = apiV1Mapper.decodeFromString<Q>(receiveText())
-            ctx.principal = appPrincipal(appSettings)
-            ctx.fromTransport(request)
+            ctx.principal = request.call.appPrincipal(appSettings)
+            ctx.fromTransport( apiV1Mapper.decodeFromString<Q>(receiveText()) )
         },
         { ctx ->
             respond(apiV1Mapper.encodeToString(ctx.toTransport()))
         })
 }
 
-
-// TODO: костыль для решения проблемы отсутствия jwt в native
-@Suppress("UnusedReceiverParameter", "UNUSED_PARAMETER")
-fun ApplicationCall.appPrincipal(appSettings: AppSettings): AppPrincipalModel = AppPrincipalModel(
-    id = AppUserId("user-1"),
-    fname  = "Ivan",
-    mname  = "Ivanovich",
-    lname  = "Ivanov",
-    groups = setOf(AppUserGroups.TEST, AppUserGroups.USER),
-)
+expect fun ApplicationCall.appPrincipal(appSettings: AppSettings): AppPrincipalModel

@@ -56,7 +56,7 @@ class ObjCrudAuthTest {
     fun readSuccessTest() = runTest {
         val obj = AppStubObjs.getText()
         val userId = obj.authorId
-        val onjId = obj.id
+        val objId = obj.id
         val repo = RepoInMemory(initObjs = listOf(obj))
         val processor = AppProcessor(
             settings = CorSettings(
@@ -66,7 +66,7 @@ class ObjCrudAuthTest {
         val context = AppContext(
             command = AppCommand.OBJ_READ,
             workMode = AppWorkMode.TEST,
-            objRequest = AppObj(id = onjId),
+            objRequest = AppObj(id = objId),
             principal = AppPrincipalModel(
                 id = userId,
                 groups = setOf(
@@ -76,6 +76,9 @@ class ObjCrudAuthTest {
             )
         )
         processor.exec(context)
+
+        println(context.errors)
+
         assertEquals(AppState.FINISHING, context.state)
         with(context.objResponse) {
             assertTrue { id.asString().isNotBlank() }

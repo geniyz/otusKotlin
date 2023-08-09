@@ -19,12 +19,14 @@ fun Application.module(appSettings: AppSettings = initAppSettings()) {
 
     initPlugins(appSettings)
 
-    val ws = WSController()
+    // val ws = WSController()
 
     routing {
         get("/") {
             call.respondText("Приложение для работы с метками")
         }
+
+        /* // тут работа с БД и авторизация через JWT — так что оно работае только в JVM ((
         route("v1") {
             pluginRegistry.getOrNull(AttributeKey("ContentNegotiation"))?:install(ContentNegotiation) {
                 json(apiV1Mapper)
@@ -32,10 +34,11 @@ fun Application.module(appSettings: AppSettings = initAppSettings()) {
             v1Objs(appSettings)
             v1Tags(appSettings)
         }
-
         webSocket("/ws/v1") {
             ws.handle(this, appSettings)
         }
+        */
+
     }
 }
 

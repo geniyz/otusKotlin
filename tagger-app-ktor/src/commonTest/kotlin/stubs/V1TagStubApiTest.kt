@@ -8,12 +8,17 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.api.v1.models.*
+import site.geniyz.otus.app.auth.AuthConfig
+import site.geniyz.otus.app.auth.addAuth
+import site.geniyz.otus.app.helpers.testSettings
+import site.geniyz.otus.app.module
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class V1TagStubApiTest {
     @Test
     fun delete() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/tag/delete") {
             val requestObj = TagDeleteRequest(
                 requestId = "12345",
@@ -26,6 +31,7 @@ class V1TagStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -37,6 +43,7 @@ class V1TagStubApiTest {
 
     @Test
     fun search() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/tag/search") {
             val requestObj = TagSearchRequest(
                 requestId = "12345",
@@ -47,6 +54,7 @@ class V1TagStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -58,6 +66,7 @@ class V1TagStubApiTest {
 
     @Test
     fun objListTags() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/tag/objects") {
             val requestObj = TagListObjsRequest(
                 requestId = "12345",
@@ -70,6 +79,7 @@ class V1TagStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }

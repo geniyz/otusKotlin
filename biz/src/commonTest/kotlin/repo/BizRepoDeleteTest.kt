@@ -65,10 +65,10 @@ class BizRepoDeleteTest {
         processor.exec(ctx)
         assertEquals(AppState.FINISHING, ctx.state)
         assertTrue { ctx.errors.isEmpty() }
-        assertEquals(obj.id, ctx.objResponse.id)
-        assertEquals(obj.name,    ctx.objResponse.name)
-        assertEquals(obj.content, ctx.objResponse.content)
-        assertEquals(obj.objType, ctx.objResponse.objType)
+        assertEquals(initObj.id, ctx.objResponse.id)
+        assertEquals(initObj.name,    ctx.objResponse.name)
+        assertEquals(initObj.content, ctx.objResponse.content)
+        assertEquals(initObj.objType, ctx.objResponse.objType)
     }
 
     @Test

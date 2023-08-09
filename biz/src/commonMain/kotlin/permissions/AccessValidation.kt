@@ -21,7 +21,10 @@ fun ICorChainDsl<AppContext>.accessValidation(title: String) = chain {
         description = "Проверка наличия прав для выполнения операции"
         on { !permitted }
         handle {
-            fail(AppError(message = "User is not allowed to perform this operation"))
+            fail(AppError(message = """
+                У пользователя ${principal.fname} (${principal.id}) [${objRepoRead.principalRelations.joinToString { it.name }}] недостаточно прав для данного действия (${command.name})
+            """.trimIndent()
+            ))
         }
     }
 }

@@ -3,6 +3,7 @@ package site.geniyz.otus.biz.validation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import site.geniyz.otus.biz.AppProcessor
+import site.geniyz.otus.biz.addTestPrincipal
 import site.geniyz.otus.common.AppContext
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.stubs.AppStubObjs
@@ -23,8 +24,10 @@ fun validationObjContentCorrect(command: AppCommand, processor: AppProcessor) = 
             name = "abc",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
+    ctx.addTestPrincipal()
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(AppState.FAILING, ctx.state)
@@ -42,8 +45,10 @@ fun validationObjContentTrim(command: AppCommand, processor: AppProcessor) = run
             name = "abc",
             content = " \n\tabc \n\t",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
+    ctx.addTestPrincipal()
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(AppState.FAILING, ctx.state)
@@ -61,6 +66,7 @@ fun validationObjContentEmpty(command: AppCommand, processor: AppProcessor) = ru
             name = "abc",
             content = "",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
     processor.exec(ctx)
@@ -82,6 +88,7 @@ fun validationObjContentSymbols(command: AppCommand, processor: AppProcessor) = 
             name = "abc",
             content = "!@#$%^&*(),.{}",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
     processor.exec(ctx)

@@ -57,9 +57,12 @@ fun Application.moduleJvm(appSettings: AppSettings = initAppSettings()) {
     val ws = WSController()
 
     routing {
+        /*
         get("/") {
             call.respondText("Приложение для работы с метками")
         }
+        */
+
         route("v1") {
             pluginRegistry.getOrNull(AttributeKey("ContentNegotiation"))?:install(ContentNegotiation) {
                 json(apiV1Mapper)
