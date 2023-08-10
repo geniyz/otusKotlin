@@ -3,11 +3,15 @@ package site.geniyz.otus.biz.validation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import site.geniyz.otus.biz.AppProcessor
+import site.geniyz.otus.biz.addTestPrincipal
 import site.geniyz.otus.common.*
 import site.geniyz.otus.common.models.*
+import site.geniyz.otus.stubs.AppStubObjs
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
+
+private val stub = AppStubObjs.getText()
 
 @OptIn(ExperimentalCoroutinesApi::class)
 fun validationIdCorrect(command: AppCommand, processor: AppProcessor) = runTest {
@@ -20,8 +24,10 @@ fun validationIdCorrect(command: AppCommand, processor: AppProcessor) = runTest 
             name = "abc",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = AppLock("123-234-abc-ABC"),
         ),
     )
+    ctx.addTestPrincipal(stub.authorId)
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(AppState.FAILING, ctx.state)
@@ -38,8 +44,10 @@ fun validationIdTrim(command: AppCommand, processor: AppProcessor) = runTest {
             name = "abc",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = AppLock("123-234-abc-ABC"),
         ),
     )
+    ctx.addTestPrincipal(stub.authorId)
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(AppState.FAILING, ctx.state)
@@ -56,8 +64,10 @@ fun validationIdEmpty(command: AppCommand, processor: AppProcessor) = runTest {
             name = "abc",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = AppLock("123-234-abc-ABC"),
         ),
     )
+    ctx.addTestPrincipal(stub.authorId)
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
     assertEquals(AppState.FAILING, ctx.state)
@@ -77,8 +87,10 @@ fun validationIdFormat(command: AppCommand, processor: AppProcessor) = runTest {
             name = "abc",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = AppLock("123-234-abc-ABC"),
         ),
     )
+    ctx.addTestPrincipal(stub.authorId)
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
     assertEquals(AppState.FAILING, ctx.state)

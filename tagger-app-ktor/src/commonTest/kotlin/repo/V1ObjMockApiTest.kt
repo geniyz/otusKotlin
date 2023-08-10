@@ -16,6 +16,8 @@ import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.backend.repo.tests.RepositoryMock
 import site.geniyz.otus.api.v1.models.*
 import site.geniyz.otus.app.AppSettings
+import site.geniyz.otus.app.auth.AuthConfig
+import site.geniyz.otus.app.auth.addAuth
 import site.geniyz.otus.app.module
 import site.geniyz.otus.common.CorSettings
 import site.geniyz.otus.common.models.*
@@ -58,6 +60,7 @@ class V1ObjMockApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
 
             setBody(apiV1Mapper.encodeToString(requestObj))
         }
@@ -95,6 +98,7 @@ class V1ObjMockApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             setBody(apiV1Mapper.encodeToString(requestObj))
         }
         val responseObj = apiV1Mapper.decodeFromString<ObjReadResponse>(response.bodyAsText())
@@ -148,6 +152,7 @@ class V1ObjMockApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             setBody(apiV1Mapper.encodeToString(requestObj))
         }
         val responseObj = apiV1Mapper.decodeFromString<ObjUpdateResponse>(response.bodyAsText())
@@ -197,6 +202,7 @@ class V1ObjMockApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             setBody(apiV1Mapper.encodeToString(requestObj))
         }
         val responseObj = apiV1Mapper.decodeFromString<ObjDeleteResponse>(response.bodyAsText())
@@ -230,6 +236,7 @@ class V1ObjMockApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(id = "123", config = AuthConfig.TEST)
             setBody(apiV1Mapper.encodeToString(requestObj))
         }
         val responseObj = apiV1Mapper.decodeFromString<ObjSearchResponse>(response.bodyAsText())

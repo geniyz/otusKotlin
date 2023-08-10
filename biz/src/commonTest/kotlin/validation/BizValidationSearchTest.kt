@@ -2,6 +2,7 @@ package site.geniyz.otus.biz.validation
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import site.geniyz.otus.backend.repo.stubs.RepoStub
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -14,7 +15,7 @@ import site.geniyz.otus.common.models.*
 class BizValidationObjSearchTest {
 
     private val command = AppCommand.OBJ_SEARCH
-    private val processor by lazy { AppProcessor(CorSettings()) }
+    private val processor by lazy { AppProcessor(CorSettings(repoTest = RepoStub())) }
 
     @Test
     fun correctEmpty() = runTest {

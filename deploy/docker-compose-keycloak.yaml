@@ -1,0 +1,55 @@
+version: "3.3"
+services:
+
+  app:
+    image: tagger-app-ktor-ktor:0.0.1-SNAPSHOT
+    container_name: tagger-app-ktor
+    ports:
+      - "8088:8088"
+    expose:
+      - "8088"
+    environment:
+      SQL_URL:     jdbc:postgresql://psql:5432/otus
+      SQL_PASS:    pass
+      SQL_USER:    postgres
+      SQL_SCHEMA:  otus
+      JWT_CERTURL: http://localhost:8081/auth/realms/otus/protocol/openid-connect/certs
+    depends_on:
+      psql:
+        condition: service_healthy
+
+  psql:
+    image: postgres
+    container_name: postgresql
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER:     postgres
+      POSTGRES_DB:       otus
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout:  5s
+      retries:  5
+
+  keycloak:
+    image: jboss/keycloak
+    ports:
+      - "8081:8080"
+      - "8082:9990"
+    volumes:
+      - ./keycloak:/tmp
+      - keycloak_data:/opt/jboss/keycloak/standalone/data
+    environment:
+      KEYCLOAK_USER:     root
+      KEYCLOAK_PASSWORD: toor
+      KEYCLOAK_IMPORT:   "/tmp/realm-export.json"
+
+volumes:
+  postgres_data:
+  keycloak_data:

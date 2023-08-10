@@ -12,7 +12,7 @@ fun ICorChainDsl<AppContext>.repoObjSetTags(title: String) = worker {
     description = "Изменение перечня меток объекта"
     on { state == AppState.RUNNING }
     handle {
-        val request = DbObjSetTagsRequest(objValidated, tagsValidated)
+        val request = DbObjSetTagsRequest(objRepoRead, tagsValidated)
         val result = repo.setTags(request)
         val resultObj = result.data
         if (result.isSuccess && resultObj != null) {

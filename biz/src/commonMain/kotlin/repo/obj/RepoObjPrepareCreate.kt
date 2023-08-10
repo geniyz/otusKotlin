@@ -12,6 +12,7 @@ fun ICorChainDsl<AppContext>.repoObjPrepareCreate(title: String) = worker {
     on { state == AppState.RUNNING }
     handle {
         objRepoRead    = objValidated // .copy()
+        objRepoRead.authorId = principal.id
         objRepoPrepare = objRepoRead
     }
 }

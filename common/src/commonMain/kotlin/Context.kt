@@ -3,6 +3,7 @@ package site.geniyz.otus.common
 import kotlinx.datetime.Instant
 
 import site.geniyz.otus.common.models.*
+import site.geniyz.otus.common.permissions.*
 import site.geniyz.otus.common.stubs.AppStubs
 import site.geniyz.otus.common.repo.IRepository
 
@@ -55,4 +56,10 @@ data class AppContext(
     var tagRepoRead:         AppTag              = AppTag(),
     var tagRepoDone:         AppTag              = AppTag(),
     var tagsRepoDone:        MutableList<AppTag> = mutableListOf(),
-)
+
+
+    var principal:           AppPrincipalModel = AppPrincipalModel.NONE,
+    val permissionsChain:    MutableSet<AppUserPermissions> = mutableSetOf(),
+    var permitted:           Boolean = false,
+
+    )

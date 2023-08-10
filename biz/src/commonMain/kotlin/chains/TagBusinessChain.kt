@@ -2,6 +2,7 @@ package site.geniyz.otus.biz
 
 import site.geniyz.otus.biz.general.prepareResult
 import site.geniyz.otus.biz.groups.*
+import site.geniyz.otus.biz.permissions.*
 import site.geniyz.otus.biz.repo.*
 import site.geniyz.otus.biz.workers.*
 
@@ -33,13 +34,18 @@ val TagBusinessChain: ICorExec<AppContext>
 
                         finishTagValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика удалдения"
+                        repoTagRead("Получение метки из БД")
+                        accessValidation("Вычисление прав доступа")
                         repoTagPrepareDelete("Подготовка к удалению метки")
                         repoTagDelete("Удаление метки из БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
                 }
+
                 operation("Поиск метки", AppCommand.TAG_SEARCH) {
                     stubs("Обработка стабов") {
                         stubTagSearchSuccess("Имитация успешной обработки")
@@ -53,13 +59,16 @@ val TagBusinessChain: ICorExec<AppContext>
 
                         finishTagFilterValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика поиска"
+                        searchTypes("Подготовка поискового запроса")
                         repoTagSearch("Поиск меток в БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
-
                 }
+
                 operation("Получение объедков метки", AppCommand.TAG_LIST_OBJS) {
                     stubs("Обработка стабов") {
                         stubTagListObjsSuccess("Имитация успешной обработки")
@@ -77,10 +86,13 @@ val TagBusinessChain: ICorExec<AppContext>
 
                         finishTagValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика получения перечня объектов с указанной меткой"
+                        searchTypes("Подготовка поискового запроса")
                         repoTagListObjs("Получение объектов в БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
                 }
             }.build()

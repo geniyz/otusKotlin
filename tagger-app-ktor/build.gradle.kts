@@ -97,6 +97,9 @@ kotlin {
 
                 implementation(project(":repo-sql")) // тут используется jdbc, так что только jvm
 
+                implementation(ktor("auth"))
+                implementation(ktor("auth-jwt"))
+
                 implementation("com.sndyuk:logback-more-appenders:1.8.8")
                 implementation("org.fluentd:fluent-logger:0.3.4")
             }
@@ -114,6 +117,16 @@ kotlin {
                 implementation(project(":repo-tests"))
             }
         }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation(ktor("test-host")) // "io.ktor:ktor-server-test-host:$ktorVersion"
+                implementation(ktor("content-negotiation", prefix = "client-"))
+                implementation(ktor("websockets", prefix = "client-"))
+            }
+        }
+
 
     }
 }

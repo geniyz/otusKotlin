@@ -8,6 +8,10 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.api.v1.models.*
+import site.geniyz.otus.app.auth.AuthConfig
+import site.geniyz.otus.app.auth.addAuth
+import site.geniyz.otus.app.helpers.testSettings
+import site.geniyz.otus.app.module
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -15,6 +19,7 @@ class V1ObjStubApiTest {
 
     @Test
     fun create() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/obj/create") {
             val requestObj = ObjCreateRequest(
                 requestId = "12345",
@@ -29,6 +34,7 @@ class V1ObjStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -40,6 +46,7 @@ class V1ObjStubApiTest {
 
     @Test
     fun read() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/obj/read") {
             val requestObj = ObjReadRequest(
                 requestId = "12345",
@@ -50,6 +57,7 @@ class V1ObjStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -61,6 +69,7 @@ class V1ObjStubApiTest {
 
     @Test
     fun update() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/obj/update") {
             val requestObj = ObjUpdateRequest(
                 requestId = "12345",
@@ -76,6 +85,7 @@ class V1ObjStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -87,6 +97,7 @@ class V1ObjStubApiTest {
 
     @Test
     fun delete() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/obj/delete") {
             val requestObj = ObjDeleteRequest(
                 requestId = "12345",
@@ -99,6 +110,7 @@ class V1ObjStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -110,6 +122,7 @@ class V1ObjStubApiTest {
 
     @Test
     fun search() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/obj/search") {
             val requestObj = ObjSearchRequest(
                 requestId = "12345",
@@ -120,6 +133,7 @@ class V1ObjStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -131,6 +145,7 @@ class V1ObjStubApiTest {
 
     @Test
     fun objListTags() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/obj/listTags") {
             val requestObj = ObjListTagsRequest(
                 requestId = "12345",
@@ -143,6 +158,7 @@ class V1ObjStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }
@@ -154,6 +170,7 @@ class V1ObjStubApiTest {
 
     @Test
     fun objSetTags() = testApplication {
+        application { module(testSettings()) }
         val response = client.post("/v1/obj/setTags") {
             val requestObj = ObjSetTagsRequest(
                 requestId = "12345",
@@ -166,6 +183,7 @@ class V1ObjStubApiTest {
                 )
             )
             contentType(ContentType.Application.Json)
+            addAuth(config = AuthConfig.TEST)
             val requestJson = apiV1Mapper.encodeToString(requestObj)
             setBody(requestJson)
         }

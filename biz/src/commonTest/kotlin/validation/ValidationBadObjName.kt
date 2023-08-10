@@ -3,6 +3,7 @@ package site.geniyz.otus.biz.validation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import site.geniyz.otus.biz.AppProcessor
+import site.geniyz.otus.biz.addTestPrincipal
 import site.geniyz.otus.common.AppContext
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.stubs.AppStubObjs
@@ -23,8 +24,10 @@ fun validationObjNameCorrect(command: AppCommand, processor: AppProcessor) = run
             name = "abc",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
+    ctx.addTestPrincipal()
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(AppState.FAILING, ctx.state)
@@ -42,8 +45,10 @@ fun validationObjNameTrim(command: AppCommand, processor: AppProcessor) = runTes
             name = " \n\t abc \t\n ",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
+    ctx.addTestPrincipal()
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(AppState.FAILING, ctx.state)
@@ -61,8 +66,10 @@ fun validationObjNameEmpty(command: AppCommand, processor: AppProcessor) = runTe
             name = "",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
+    ctx.addTestPrincipal(stub.authorId)
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
     assertEquals(AppState.FAILING, ctx.state)
@@ -82,8 +89,10 @@ fun validationObjNameSymbols(command: AppCommand, processor: AppProcessor) = run
             name = "!@#$%^&*(),.{}",
             content = "abc",
             objType = AppObjType.TEXT,
+            lock = stub.lock,
         ),
     )
+    ctx.addTestPrincipal(stub.authorId)
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
     assertEquals(AppState.FAILING, ctx.state)

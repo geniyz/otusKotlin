@@ -3,6 +3,7 @@ package site.geniyz.otus.biz
 import site.geniyz.otus.biz.general.*
 import site.geniyz.otus.biz.repo.*
 import site.geniyz.otus.biz.groups.*
+import site.geniyz.otus.biz.permissions.*
 import site.geniyz.otus.biz.workers.*
 
 import site.geniyz.otus.common.AppContext
@@ -39,13 +40,18 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Завершение проверок")
                     }
+
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика сохранения"
                         repoObjPrepareCreate("Подготовка объекта для сохранения")
+                        accessValidation("Вычисление прав доступа")
                         repoObjCreate("Создание объекта в БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
                 }
+
                 operation("Получить сущность", AppCommand.OBJ_READ) {
                     stubs("Обработка стабов") {
                         stubObjReadSuccess("Имитация успешной обработки")
@@ -63,12 +69,21 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика считывания данных объекта"
                         repoObjRead("Получение объекта в БД")
+                        accessValidation("Вычисление прав доступа")
+                        worker {
+                            title = "Подготовка ответа для Read"
+                            on { state == AppState.RUNNING }
+                            handle { objRepoDone = objRepoRead }
+                        }
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
                 }
+
                 operation("Изменить сущность", AppCommand.OBJ_UPDATE) {
                     stubs("Обработка стабов") {
                         stubObjUpdateSuccess("Имитация успешной обработки")
@@ -97,13 +112,17 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Завершение проверок")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика корректировки данных"
+                        repoObjRead("Чтение объявления из БД")
+                        accessValidation("Вычисление прав доступа")
                         repoObjPrepareUpdate("Подготовка к корректировке данных объекта в БД")
                         repoObjUpdate ("Изменение объекта в БД")
                     }
                     prepareResult("Подготовка ответа")
                 }
+
                 operation("Удалить сущность", AppCommand.OBJ_DELETE) {
                     stubs("Обработка стабов") {
                         stubObjDeleteSuccess("Имитация успешной обработки")
@@ -124,13 +143,18 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика Удаления данных"
+                        repoObjRead("Чтение объявления из БД")
+                        accessValidation("Вычисление прав доступа")
                         repoObjPrepareDelete("Подготовка к удалению объекта из БД")
                         repoObjDelete("Удаление объекта из БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
                 }
+
                 operation("Поиск сущности", AppCommand.OBJ_SEARCH) {
                     stubs("Обработка стабов") {
                         stubObjSearchSuccess("Имитация успешной обработки")
@@ -144,13 +168,17 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjFilterValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика поиска объектов"
+                        searchTypes("Подготовка поискового запроса")
                         repoObjSearch("Поиск объектов из БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
 
                 }
+
                 operation("Получение меток объекта", AppCommand.OBJ_LIST_TAGS) {
                     stubs("Обработка стабов") {
                         stubObjListTagsSuccess("Имитация успешной обработки")
@@ -168,12 +196,17 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика получения меток объенкта"
+                        repoObjRead("Получение объекта в БД")
+                        accessValidation("Вычисление прав доступа")
                         repoObjListTags("Получение меток объекта из БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
                 }
+
                 operation("Изменение меток объекта", AppCommand.OBJ_SET_TAGS) {
                     stubs("Обработка стабов") {
                         stubObjSetTagsSuccess("Имитация успешной обработки")
@@ -196,10 +229,14 @@ val ObjBusinessChain: ICorExec<AppContext>
 
                         finishObjValidation("Успешное завершение процедуры валидации")
                     }
+                    chainPermissions("Вычисление разрешений для пользователя")
                     chain {
                         title = "Логика изменения меток объенкта"
+                        repoObjRead("Получение объекта в БД")
+                        accessValidation("Вычисление прав доступа")
                         repoObjSetTags("Изменение меток объекта из БД")
                     }
+                    frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                     prepareResult("Подготовка ответа")
                 }
             }.build()

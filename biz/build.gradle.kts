@@ -19,6 +19,7 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
 
                 implementation(project(":common"))
+                implementation(project(":auth"))
                 implementation(project(":stubs"))
                 implementation(project(":repo-inmem"))
                 implementation(project(":lib-cor"))
@@ -31,6 +32,11 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+
+                implementation(project(":auth"))
+                implementation(project(":repo-inmem"))
+                implementation(project(":repo-tests"))
+                implementation(project(":repo-stubs"))
 
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
             }
