@@ -50,6 +50,11 @@ services:
       KEYCLOAK_PASSWORD: toor
       KEYCLOAK_IMPORT:   "/tmp/realm-export.json"
 
+  hoppscotch:
+    image: postman/newman
+    ports:
+      - "3000:3000"
+
 volumes:
   postgres_data:
   keycloak_data:

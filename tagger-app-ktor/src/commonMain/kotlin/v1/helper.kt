@@ -1,5 +1,6 @@
 package site.geniyz.otus.app.v1
 
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -26,7 +27,7 @@ suspend inline fun <reified Q : IRequest, @Suppress("unused") reified R : IRespo
             ctx.fromTransport( apiV1Mapper.decodeFromString<Q>(receiveText()) )
         },
         { ctx ->
-            respond(apiV1Mapper.encodeToString(ctx.toTransport()))
+            respondText(apiV1Mapper.encodeToString(ctx.toTransport()), ContentType.Application.Json)
         })
 }
 

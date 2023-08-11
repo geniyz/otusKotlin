@@ -1,19 +1,12 @@
 package site.geniyz.otus.app
 
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
-import io.ktor.server.cio.*
 import io.ktor.server.engine.*
-import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.server.websocket.*
-import io.ktor.util.*
-
-import site.geniyz.otus.api.v1.apiV1Mapper
 import site.geniyz.otus.app.plugins.initAppSettings
 import site.geniyz.otus.app.plugins.initPlugins
-import site.geniyz.otus.app.v1.*
+
 
 fun Application.module(appSettings: AppSettings = initAppSettings()) {
 
@@ -43,7 +36,7 @@ fun Application.module(appSettings: AppSettings = initAppSettings()) {
 }
 
 fun main() {
-    embeddedServer(CIO) {
+    embeddedServer(io.ktor.server.cio.CIO) {
         module()
     }.start(wait = true)
 }

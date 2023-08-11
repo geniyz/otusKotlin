@@ -15,9 +15,6 @@ plugins {
     kotlin("multiplatform")
     id("io.ktor.plugin")
 }
-dependencies {
-    implementation("io.ktor:ktor-server-call-logging-jvm:2.3.0")
-}
 
 repositories {
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
@@ -62,6 +59,7 @@ kotlin {
 
                 implementation(ktor("core")) // "io.ktor:ktor-server-core:$ktorVersion"
                 implementation(ktor("cio")) // "io.ktor:ktor-server-cio:$ktorVersion"
+                implementation(ktor("cio", "client-")) // "io.ktor:ktor-client-cio:$ktorVersion"
                 implementation(ktor("auth")) // "io.ktor:ktor-server-auth:$ktorVersion"
                 implementation(ktor("auto-head-response")) // "io.ktor:ktor-server-auto-head-response:$ktorVersion"
                 implementation(ktor("caching-headers")) // "io.ktor:ktor-server-caching-headers:$ktorVersion"
@@ -99,6 +97,8 @@ kotlin {
 
                 implementation(ktor("auth"))
                 implementation(ktor("auth-jwt"))
+
+                implementation(ktor("swagger"))
 
                 implementation("com.sndyuk:logback-more-appenders:1.8.8")
                 implementation("org.fluentd:fluent-logger:0.3.4")

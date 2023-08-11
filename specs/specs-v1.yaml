@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.0.4
 info:
-  title: "Tags ${VERSION_APP}"
+  title: "TaggerApp"
   description: Инструментарий назначения меток различным сущностям
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-  - url: http://localhost/v1
+  - url: /v1
 tags:
   - name: obj
     description: Сущность, объект
@@ -230,7 +230,6 @@ components:
         requestType:
           type: string
           description: Поле-дескриминатор для вычисления типа запроса
-          example: create
         requestId:
           type: string
           description: Идентификатор запроса для отладки
@@ -273,7 +272,6 @@ components:
         responseType:
           type: string
           description: Дискриминатор для вычисления типа запроса
-          example: create
         requestId:
           type: string
           description: Идентификатор запроса для отладки

@@ -24,7 +24,7 @@ fun Application.initPlugins(appSettings: AppSettings) {
         allowMethod(HttpMethod.Delete)
         allowMethod(HttpMethod.Patch)
         allowHeader(HttpHeaders.Authorization)
-        allowHeader("MyCustomHeader")
+        // allowHeader("MyCustomHeader")
         allowHeader("*")
         appSettings.appUrls.forEach {
             val split = it.split("://")
