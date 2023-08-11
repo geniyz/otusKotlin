@@ -9,4 +9,6 @@ object LnkTable : Table("objects_tags") {
 
     override val primaryKey = PrimaryKey(id)
 
+    val ui = index(true, obj, tag) // чтоб не дублировались связи
+
 }

@@ -6,6 +6,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import site.geniyz.otus.backend.repo.inmemory.model.*
 import site.geniyz.otus.common.helpers.errorRepoConcurrency
+import site.geniyz.otus.common.helpers.errorRepoUnique
 import site.geniyz.otus.common.models.*
 import site.geniyz.otus.common.repo.*
 import kotlin.time.Duration
@@ -57,6 +58,22 @@ class RepoInMemory(
         val key = randomUuid()
         val o = rq.obj.copy(id = AppObjId(key), lock = AppLock(randomUuid()))
         val entity = ObjEntity(o)
+
+
+        if(cacheObjs.asMap().asSequence()
+                .filter { entry ->
+                    // key != entry.key &&
+                            rq.obj.authorId.asString() == entry.value.author &&
+                            rq.obj.name == entry.value.name
+                }.any()
+        ){
+            return DbObjResponse(
+                data = o,
+                isSuccess = false,
+                errors = listOf(errorRepoUnique(listOf("name", "author")))
+            )
+        }
+
         cacheObjs.put(key, entity)
         return DbObjResponse(
             data = o,
@@ -82,21 +99,39 @@ class RepoInMemory(
         val entity  = ObjEntity(newObj)
         return mutex.withLock {
             val oldObj = cacheObjs.get(key)
-            when {
-                oldObj == null              -> rezErrorObjNotFound
-                oldObj.lock != oldLock      -> DbObjResponse(
-                                                    data = oldObj.toInternal(),
-                                                    isSuccess = false,
-                                                    errors = listOf(errorRepoConcurrency(AppLock(oldLock), oldObj.lock?.let { AppLock(it) }))
-                                                )
 
-                else                        -> {
-                                                    cacheObjs.put(key, entity)
-                                                    DbObjResponse(
-                                                        data = newObj,
-                                                        isSuccess = true,
-                                                    )
-                                               }
+
+                when {
+                    oldObj == null -> rezErrorObjNotFound
+                    oldObj.lock != oldLock -> DbObjResponse(
+                        data = oldObj.toInternal(),
+                        isSuccess = false,
+                        errors = listOf(errorRepoConcurrency(AppLock(oldLock), oldObj.lock?.let { AppLock(it) }))
+                    )
+
+                    else -> {
+
+                        if(cacheObjs.asMap().asSequence()
+                                .filter { entry ->
+                                    key != entry.key &&
+                                        rq.obj.authorId.asString() == entry.value.author &&
+                                        rq.obj.name == entry.value.name
+                                }.any()
+                        ){
+                            DbObjResponse(
+                                data = oldObj.toInternal(),
+                                isSuccess = false,
+                                errors = listOf(errorRepoUnique(listOf("name", "author")))
+                            )
+                        }
+
+                        cacheObjs.put(key, entity)
+                        DbObjResponse(
+                            data = newObj,
+                            isSuccess = true,
+                        )
+                    }
+
             }
         }
     }

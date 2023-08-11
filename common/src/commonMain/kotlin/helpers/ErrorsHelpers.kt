@@ -79,3 +79,14 @@ fun errorAdministration(
     level = level,
     exception = exception,
 )
+
+fun errorRepoUnique(
+    fields: List<String> = emptyList(),
+    exception: Exception? = null,
+) = AppError(
+    field = fields.joinToString(),
+    code = "unique",
+    group = "repo",
+    message = "Нарушение уникатьности полей $fields",
+    exception = exception,
+)

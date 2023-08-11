@@ -22,6 +22,8 @@ object ObjTable : Table("objects") {
 
     override val primaryKey = PrimaryKey(id)
 
+    val ui = index(true, author, name) // у пользователя не может быть нескольких объектов с одинаковым наименованием
+
     fun from(res: InsertStatement<Number>) = AppObj(
         id        = AppObjId(res[id].toString()),
         name      = res[name],
