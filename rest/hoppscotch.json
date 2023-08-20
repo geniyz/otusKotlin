@@ -1,0 +1,161 @@
+[
+  {
+    "v": 1,
+    "name": "otus",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "endpoint": "http://localhost:8081/auth/realms/otus/protocol/openid-connect/token",
+        "name": "Авторизация",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "none",
+          "authActive": true,
+          "addTo": "Headers",
+          "key": "",
+          "value": ""
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": "application/x-www-form-urlencoded",
+          "body": "client_id: TaggerApp\ngrant_type: password\nusername: user\npassword: user"
+        }
+      },
+      {
+        "v": "1",
+        "endpoint": "http://127.0.0.1:8088/v1/obj/create",
+        "name": "Создание объекта",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "bearer",
+          "authActive": true,
+          "addTo": "Headers",
+          "key": "",
+          "value": "",
+          "token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJERjdMT1VfeVNiYjRsODJWZFgyM1ZPT1pIU1dvMkhNUjdWZUYtM1FKQnZzIn0.eyJleHAiOjE2OTI1NDY0MTMsImlhdCI6MTY5MjU0NjExMywianRpIjoiY2Y2MDUzYWQtM2ZkMy00Y2RmLTk0OTEtNTA1NjQyODMzY2YzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL290dXMiLCJhdWQiOlsidGFnZ2VyLXVzZXJzIiwiYWNjb3VudCJdLCJzdWIiOiIzNGE3NDRjYS1iOWU3LTQ0OTgtOTUwYy04MTA5ODJmYmQ2YjgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJUYWdnZXJBcHAiLCJzZXNzaW9uX3N0YXRlIjoiYTZlZTE2YTAtZmQxNS00MTFhLTk1OTgtNjk3MTVmMDhhMWIzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vMC4wLjAuMDo4MDg4IiwiaHR0cDovLzEyNy4wLjAuMTozMDAwIiwiaHR0cDovLzAuMC4wLjA6MzAwMCIsImh0dHA6Ly8xMjcuMC4wLjE6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1vdHVzIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiIiwic2lkIjoiYTZlZTE2YTAtZmQxNS00MTFhLTk1OTgtNjk3MTVmMDhhMWIzIiwiZ3JvdXBzIjpbIlVTRVIiXX0.hzbAR3vlQ_d_mrbYeKNuJp2zbEZ1msAXuv8wEW5VvCk3YCKm26zgW-kwR2kv7vv37K-Pmu-6KEvYfuBlsGYVyaCG7tsP2rX-hkLanionjLnblC5_XT01NJ5JqZnRpiMZYfidzvCW2cvY9hrX-mHWxOW0kvGKSC70bCYzFJigNttR5OMB7GkAofghMeiJUG6ei5IJR-mkqLnOCilrlS7DVY79uEp_vyL_V18jk2BUaymuyGkNzVZPvy2EJ0oyFjQYHLluTa-CHX0BGddDtUeT4Yr3riaCmQbfc_vdXUhmuoW2p9HrEx3nBUuZYHyDM9FfdSq6NYoZfgoXRpzO-fiIIQ"
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"requestId\": \"1070\",\n  \"obj\": {\n    \"name\": \"Достоевский Карамазовы\",\n    \"content\": \"http://books.ru/dostoevsy/brothers_of_karamaz\",\n    \"objType\": \"href\"\n  }\n}"
+        }
+      },
+      {
+        "v": "1",
+        "endpoint": "http://127.0.0.1:8088/v1/obj/update",
+        "name": "Изменение объекта",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "bearer",
+          "authActive": true,
+          "addTo": "Headers",
+          "key": "",
+          "value": "",
+          "token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJERjdMT1VfeVNiYjRsODJWZFgyM1ZPT1pIU1dvMkhNUjdWZUYtM1FKQnZzIn0.eyJleHAiOjE2OTI1NDU4MDcsImlhdCI6MTY5MjU0NTUwNywianRpIjoiMDFjYzE5MzQtMGI3OS00OTNjLWJjNTEtNDI4YzNjNzMzZjdmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL290dXMiLCJhdWQiOlsidGFnZ2VyLXVzZXJzIiwiYWNjb3VudCJdLCJzdWIiOiIzNGE3NDRjYS1iOWU3LTQ0OTgtOTUwYy04MTA5ODJmYmQ2YjgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJUYWdnZXJBcHAiLCJzZXNzaW9uX3N0YXRlIjoiOGQzNWUwYTQtYjg2NC00YWY4LTkwY2ItOTIxZGM0NzM5YjlmIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vMC4wLjAuMDo4MDg4IiwiaHR0cDovLzEyNy4wLjAuMTozMDAwIiwiaHR0cDovLzAuMC4wLjA6MzAwMCIsImh0dHA6Ly8xMjcuMC4wLjE6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1vdHVzIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiIiwic2lkIjoiOGQzNWUwYTQtYjg2NC00YWY4LTkwY2ItOTIxZGM0NzM5YjlmIiwiZ3JvdXBzIjpbIlVTRVIiXX0.XCcUDWl3hmQMu_zg-4quJQIP28h8zDBVDN8XpOKLRcY3Zba8Pv0SpvkuvpgMoINOR2cfYBxoMCGTBxXf3BQweUjm230-cfAoSZDVq1glSzpzhT5lyNvWiVl7SZZwiz_zYombIWqgk492lwvzNHPp60mDhCZNX7SF9TqZR9PE8vWGU5FUYbo7OtgzHjcEh6oGDqoHKks8kByxIchrgcFaY-czsv3i82aCYnBb-lUdU5M8XSGakUWvgwId_vvA9m6VXZ1sswkBLOhFRx26c0VqabKyJAb6k3hi614R2Jzmx-eTh3Q1PjBZgtG8YNe-1sNdFzxehp54YkqRW2JsIK0J5w"
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"requestId\": \"1020\",\n  \"obj\": {\n    \"name\": \"Набоков Лолита\",\n    \"content\": \"http://books.ru/nabokov/lolita\",\n    \"objType\": \"href\",\n    \"id\": \"5fa4a4e4-6b8e-479f-ab7d-abbe51065835\",\n    \"lock\": \"3e9cc77b-5789-4e16-af2b-1ff7fcaff6b0\"\n  }\n}"
+        }
+      },
+      {
+        "v": "1",
+        "endpoint": "http://localhost:8081/auth/realms/otus/protocol/openid-connect/token",
+        "name": "Обновить токен",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "none",
+          "authActive": true,
+          "addTo": "Headers",
+          "key": "",
+          "value": ""
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": "application/x-www-form-urlencoded",
+          "body": "client_id: TaggerApp\ngrant_type: refresh_token\nrefresh_token: "
+        }
+      },
+      {
+        "v": "1",
+        "endpoint": "http://localhost:8088/v1/obj/search",
+        "name": "Поиск объектов",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "bearer",
+          "authActive": true,
+          "addTo": "Headers",
+          "key": "",
+          "value": "",
+          "token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJERjdMT1VfeVNiYjRsODJWZFgyM1ZPT1pIU1dvMkhNUjdWZUYtM1FKQnZzIn0.eyJleHAiOjE2OTI1NDkwNjYsImlhdCI6MTY5MjU0ODc2NiwianRpIjoiNDg2ZGEwNDctODNmOC00ODg5LWIwNDEtNTZkZjJlNzE1NGIyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL290dXMiLCJhdWQiOlsidGFnZ2VyLXVzZXJzIiwiYWNjb3VudCJdLCJzdWIiOiIzNGE3NDRjYS1iOWU3LTQ0OTgtOTUwYy04MTA5ODJmYmQ2YjgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJUYWdnZXJBcHAiLCJzZXNzaW9uX3N0YXRlIjoiNjlkMDExNmItZjVmNy00ZGFjLWJkMzktMmVhZTJhMjdmMzFmIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vMC4wLjAuMDo4MDg4IiwiaHR0cDovLzEyNy4wLjAuMTozMDAwIiwiaHR0cDovLzAuMC4wLjA6MzAwMCIsImh0dHA6Ly8xMjcuMC4wLjE6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1vdHVzIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiIiwic2lkIjoiNjlkMDExNmItZjVmNy00ZGFjLWJkMzktMmVhZTJhMjdmMzFmIiwiZ3JvdXBzIjpbIlVTRVIiXX0.OMO16BA6yP-X0wkvKnS3i10z8ZuFXganH-3mmkQZo2JxrggyS7kNASKSXb35AvuY0yiXa9H-MoOIFKjDijVBOtBIS_xsQkYZgDGEdcmDJa83qAa1aw9lzVDznf8HVLOqsZ0PWru1IAUmqTpyUiOCjQH9tIgOKj53VbXg7LpcR4EjIdWodTPO4xjleGkFukXCHAnXkSGOTYhUOIwegqrgGE8ACo7pC3x-v9I9NP6qeIVu-55GNGW48mCqK5QcyFQo09Ynqjr8Cgm2fABEGlKx5t-a83a1xwAoCWKMnbMFpLtLbrSpuFcK9cXKef-DX2dAVimVRIo1IL_5nUNnLcH8iQ"
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"requestId\": \"1040\",\n  \"objFilter\": {\n    \"searchString\": \"\"\n  }\n}"
+        }
+      },
+      {
+        "v": "1",
+        "endpoint": "http://127.0.0.1:8088/v1/obj/setTags",
+        "name": "Пометить",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "bearer",
+          "authActive": true,
+          "addTo": "Headers",
+          "key": "",
+          "value": "",
+          "token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJERjdMT1VfeVNiYjRsODJWZFgyM1ZPT1pIU1dvMkhNUjdWZUYtM1FKQnZzIn0.eyJleHAiOjE2OTI1NDkwNjYsImlhdCI6MTY5MjU0ODc2NiwianRpIjoiNDg2ZGEwNDctODNmOC00ODg5LWIwNDEtNTZkZjJlNzE1NGIyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL290dXMiLCJhdWQiOlsidGFnZ2VyLXVzZXJzIiwiYWNjb3VudCJdLCJzdWIiOiIzNGE3NDRjYS1iOWU3LTQ0OTgtOTUwYy04MTA5ODJmYmQ2YjgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJUYWdnZXJBcHAiLCJzZXNzaW9uX3N0YXRlIjoiNjlkMDExNmItZjVmNy00ZGFjLWJkMzktMmVhZTJhMjdmMzFmIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vMC4wLjAuMDo4MDg4IiwiaHR0cDovLzEyNy4wLjAuMTozMDAwIiwiaHR0cDovLzAuMC4wLjA6MzAwMCIsImh0dHA6Ly8xMjcuMC4wLjE6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1vdHVzIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiIiwic2lkIjoiNjlkMDExNmItZjVmNy00ZGFjLWJkMzktMmVhZTJhMjdmMzFmIiwiZ3JvdXBzIjpbIlVTRVIiXX0.OMO16BA6yP-X0wkvKnS3i10z8ZuFXganH-3mmkQZo2JxrggyS7kNASKSXb35AvuY0yiXa9H-MoOIFKjDijVBOtBIS_xsQkYZgDGEdcmDJa83qAa1aw9lzVDznf8HVLOqsZ0PWru1IAUmqTpyUiOCjQH9tIgOKj53VbXg7LpcR4EjIdWodTPO4xjleGkFukXCHAnXkSGOTYhUOIwegqrgGE8ACo7pC3x-v9I9NP6qeIVu-55GNGW48mCqK5QcyFQo09Ynqjr8Cgm2fABEGlKx5t-a83a1xwAoCWKMnbMFpLtLbrSpuFcK9cXKef-DX2dAVimVRIo1IL_5nUNnLcH8iQ"
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": "application/json",
+          "body": "\n{\n  \"requestId\": \"1080\",\n  \"obj\": {\n    \"id\": \"5fa4a4e4-6b8e-479f-ab7d-abbe51065835\",\n    \"lock\": \"8d10c5b9-adb0-4122-8625-91b0ac350df2\",\n    \"tags\": [\n      \"Книги\", \"Набоков\", \"XX\", \"Английская литература\", \"Русская литература\"\n    ]\n  }\n}\n"
+        }
+      },
+      {
+        "v": "1",
+        "endpoint": "http://127.0.0.1:8088/v1/obj/listTags",
+        "name": "Список меток",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "bearer",
+          "authActive": true,
+          "addTo": "Headers",
+          "key": "",
+          "value": "",
+          "token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJERjdMT1VfeVNiYjRsODJWZFgyM1ZPT1pIU1dvMkhNUjdWZUYtM1FKQnZzIn0.eyJleHAiOjE2OTI1NDkwNjYsImlhdCI6MTY5MjU0ODc2NiwianRpIjoiNDg2ZGEwNDctODNmOC00ODg5LWIwNDEtNTZkZjJlNzE1NGIyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL290dXMiLCJhdWQiOlsidGFnZ2VyLXVzZXJzIiwiYWNjb3VudCJdLCJzdWIiOiIzNGE3NDRjYS1iOWU3LTQ0OTgtOTUwYy04MTA5ODJmYmQ2YjgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJUYWdnZXJBcHAiLCJzZXNzaW9uX3N0YXRlIjoiNjlkMDExNmItZjVmNy00ZGFjLWJkMzktMmVhZTJhMjdmMzFmIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vMC4wLjAuMDo4MDg4IiwiaHR0cDovLzEyNy4wLjAuMTozMDAwIiwiaHR0cDovLzAuMC4wLjA6MzAwMCIsImh0dHA6Ly8xMjcuMC4wLjE6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6ODA4OCIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1vdHVzIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiIiwic2lkIjoiNjlkMDExNmItZjVmNy00ZGFjLWJkMzktMmVhZTJhMjdmMzFmIiwiZ3JvdXBzIjpbIlVTRVIiXX0.OMO16BA6yP-X0wkvKnS3i10z8ZuFXganH-3mmkQZo2JxrggyS7kNASKSXb35AvuY0yiXa9H-MoOIFKjDijVBOtBIS_xsQkYZgDGEdcmDJa83qAa1aw9lzVDznf8HVLOqsZ0PWru1IAUmqTpyUiOCjQH9tIgOKj53VbXg7LpcR4EjIdWodTPO4xjleGkFukXCHAnXkSGOTYhUOIwegqrgGE8ACo7pC3x-v9I9NP6qeIVu-55GNGW48mCqK5QcyFQo09Ynqjr8Cgm2fABEGlKx5t-a83a1xwAoCWKMnbMFpLtLbrSpuFcK9cXKef-DX2dAVimVRIo1IL_5nUNnLcH8iQ"
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": "application/json",
+          "body": "\n{\n  \"requestId\": \"1090\",\n  \"obj\": {\n    \"id\": \"5fa4a4e4-6b8e-479f-ab7d-abbe51065835\",\n    \"lock\": \"8d10c5b9-adb0-4122-8625-91b0ac350df2\"\n  }\n}\n"
+        }
+      }
+    ]
+  }
+]

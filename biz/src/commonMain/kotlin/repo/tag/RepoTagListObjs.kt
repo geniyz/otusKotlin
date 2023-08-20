@@ -16,9 +16,10 @@ fun ICorChainDsl<AppContext>.repoTagListObjs(title: String) = worker {
             ownerId = objValidated.authorId,
         )
         val result = repo.searchObjs(request)
-        val resultTag = result.data
-        if (result.isSuccess && resultTag != null) {
-            objsRepoDone = resultTag.toMutableList()
+        val resultObjs = result.data
+        if (result.isSuccess && resultObjs != null) {
+            objsRepoDone = resultObjs.toMutableList()
+            tagRepoDone = repo.readTag( DbTagIdRequest(tagValidated) ).data!!
         } else {
             state = AppState.FAILING
             errors.addAll(result.errors)

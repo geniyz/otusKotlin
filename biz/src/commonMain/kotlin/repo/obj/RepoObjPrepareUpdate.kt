@@ -16,6 +16,7 @@ fun ICorChainDsl<AppContext>.repoObjPrepareUpdate(title: String) = worker {
             name    = objValidated.name
             content = objValidated.content
             objType = objValidated.objType
+            lock    = objValidated.lock
         }
     }
 }

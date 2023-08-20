@@ -45,6 +45,8 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
+
+                implementation("com.github.radist-nt:iuliia-java:0.1.1")
             }
         }
         @Suppress("UNUSED_VARIABLE")

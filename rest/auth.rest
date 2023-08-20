@@ -20,14 +20,30 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "requestId": "312",
+  "requestId": "1010",
   "obj": {
-    "name": "зАПИСКА",
-    "content": "Входящая служебная записка",
-    "objType": "text"
+    "name": "Набоков Лолита",
+    "content": "http://books.ru/lolita",
+    "objType": "href"
   }
 }
 
+
+### Update
+POST http://127.0.0.1:8088/v1/obj/update
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "requestId": "1020",
+  "obj": {
+    "name": "Набоков Лолита",
+    "content": "http://books.ru/nabokov/lolita",
+    "objType": "href",
+    "id": "5fa4a4e4-6b8e-479f-ab7d-abbe51065835",
+    "lock": "3e9cc77b-5789-4e16-af2b-1ff7fcaff6b0"
+  }
+}
 
 ### get all objs
 POST http://localhost:8088/v1/obj/search

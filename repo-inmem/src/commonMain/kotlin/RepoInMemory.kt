@@ -62,7 +62,6 @@ class RepoInMemory(
 
         if(cacheObjs.asMap().asSequence()
                 .filter { entry ->
-                    // key != entry.key &&
                             rq.obj.authorId.asString() == entry.value.author &&
                             rq.obj.name == entry.value.name
                 }.any()
@@ -99,7 +98,6 @@ class RepoInMemory(
         val entity  = ObjEntity(newObj)
         return mutex.withLock {
             val oldObj = cacheObjs.get(key)
-
 
                 when {
                     oldObj == null -> rezErrorObjNotFound

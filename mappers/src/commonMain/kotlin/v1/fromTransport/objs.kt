@@ -82,7 +82,7 @@ fun AppContext.fromTransport(request: ObjSetTagsRequest) {
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
     objRequest = request.obj?.id.toObjWithId( lock= request.obj?.lock )
-    tagsRequest = request.obj?.tags?.map { AppTag(code = it) }?.toMutableList() ?: mutableListOf()
+    tagsRequest = request.obj?.tags?.map { AppTag(code = it, name = it) }?.toMutableList() ?: mutableListOf()
 }
 
 private fun ObjSearchFilter?.toInternal() = AppObjFilter(

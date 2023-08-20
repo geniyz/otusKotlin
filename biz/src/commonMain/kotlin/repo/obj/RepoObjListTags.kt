@@ -19,6 +19,7 @@ fun ICorChainDsl<AppContext>.repoObjListTags(title: String) = worker {
         val resultObj = result.data
         if (result.isSuccess && resultObj != null) {
             tagsRepoDone = resultObj.toMutableList()
+            objRepoDone = objRepoRead
         } else {
             state = AppState.FAILING
             errors.addAll(result.errors)

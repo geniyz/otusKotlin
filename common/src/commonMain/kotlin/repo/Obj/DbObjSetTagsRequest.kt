@@ -4,7 +4,7 @@ import site.geniyz.otus.common.models.*
 
 data class DbObjSetTagsRequest(
     val id: AppObjId,
-    val tags: List<AppTag>,
+    var tags: List<AppTag>,
 ) {
     constructor(obj: AppObj, tags: List<AppTag>): this(id = obj.id, tags = tags)
 }

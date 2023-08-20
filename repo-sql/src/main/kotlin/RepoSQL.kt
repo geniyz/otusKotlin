@@ -106,7 +106,10 @@ class RepoSQL(
     override suspend fun updateObj(rq: DbObjRequest): DbObjResponse =
         updateObj(rq.obj.id, rq.obj.lock) {
             ObjTable.update({ ObjTable.id eq rq.obj.id.asString() }) {
-                to(it, rq.obj.copy(updatedAt = Clock.System.now()), randomUuid)
+                to(it, rq.obj.copy(
+                    updatedAt = Clock.System.now(),
+                    lock = AppLock.NONE,
+                    ), randomUuid)
             }
             readObj(rq.obj.id)
         }
@@ -187,7 +190,10 @@ class RepoSQL(
     override suspend fun updateTag(rq: DbTagRequest): DbTagResponse =
         updateTag(rq.tag.id, rq.tag.lock) {
             TagTable.update({ ObjTable.id eq rq.tag.id.asString() }) {
-                to(it, rq.tag, randomUuid)
+                to(it, rq.tag.copy(
+                    updatedAt = Clock.System.now(),
+                    lock = AppLock.NONE,
+                    ), randomUuid)
             }
             readTag(rq.tag.id)
         }
@@ -237,14 +243,14 @@ class RepoSQL(
             LnkTable.deleteWhere { LnkTable.obj eq rq.id.asString() }
 
             rq.tags.forEach { t ->
-                val tagCur = TagTable.select(TagTable.code eq t.code)
+                val tagCur = TagTable.select(TagTable.name eq t.name)
 
                 val tagId = if( 0L == tagCur.count() ){ // если нет такой метки — создать:
                     val res = TagTable.insert {
                         to(it,
                             t.copy(
                                 code      = t.code,
-                                name      = t.code,
+                                name      = t.name,
                                 createdAt = Clock.System.now(),
                                 updatedAt = Clock.System.now(),
                             ),

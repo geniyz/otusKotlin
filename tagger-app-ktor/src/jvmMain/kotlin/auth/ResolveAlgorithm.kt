@@ -27,17 +27,17 @@ fun HttpAuthHeader.resolveAlgorithmKeycloak(authConfig: AuthConfig): Algorithm {
         throw IllegalArgumentException("Cannot parse JWT token from request", e)
     }
     val algo = token.algorithm
-    if (algo != "RS256") {
-        throw IllegalArgumentException("Wrong algorithm in JWT ($algo). Must be ...")
-    }
+    // if (algo != "RS256") { throw IllegalArgumentException("Wrong algorithm in JWT ($algo). Must be ...") }
     val keyId = token.keyId
     val jwk = jwks.computeIfAbsent(keyId){
         val provider = UrlJwkProvider(URL(authConfig.certUrl))
         provider.get(keyId)
     }
     val publicKey = jwk.publicKey
-    if (publicKey !is RSAPublicKey) {
-        throw IllegalArgumentException("Key with ID was found in JWKS but is not a RSA-key.")
+    if (algo == "RS256"){
+        if (publicKey !is RSAPublicKey) throw IllegalArgumentException("Key with ID was found in JWKS but is not a RSA-key.")
+        return Algorithm.RSA256(publicKey, null)
     }
-    return Algorithm.RSA256(publicKey, null)
+    // if (algo == "HS256") return Algorithm.HMAC256( publicKey ) // ??
+    throw IllegalArgumentException("Wrong algorithm in JWT ($algo). Must be ...")
 }
