@@ -129,8 +129,8 @@ class RepoSQL(
                     }
                     if (rq.searchString.isNotBlank()) {
                         add(
-                            (ObjTable.name like "%${rq.searchString}%")
-                                    or (ObjTable.content like "%${rq.searchString}%")
+                            (ObjTable.name.upperCase() like "%${rq.searchString.uppercase()}%")
+                                    or (ObjTable.content.upperCase() like "%${rq.searchString.uppercase()}%")
                         )
                     }
                 }.reduce { a, b -> a and b }
@@ -210,8 +210,8 @@ class RepoSQL(
                     add(Op.TRUE)
                     if (rq.searchString.isNotBlank()) {
                         add(
-                            (TagTable.name like "%${rq.searchString}%")
-                                    or (TagTable.code like "%${rq.searchString}%")
+                            (TagTable.name.upperCase() like "%${rq.searchString.uppercase()}%")
+                                    or (TagTable.code.upperCase() like "%${rq.searchString.uppercase()}%")
                         )
                     }
                 }.reduce { a, b -> a and b }

@@ -1,5 +1,6 @@
 package site.geniyz.otus.biz
 
+import site.geniyz.otus.biz.general.initRepo
 import site.geniyz.otus.biz.general.prepareResult
 import site.geniyz.otus.biz.groups.*
 import site.geniyz.otus.biz.permissions.*
@@ -14,6 +15,8 @@ import site.geniyz.otus.biz.validation.*
 
 val TagBusinessChain: ICorExec<AppContext>
     get() = rootChain<AppContext> {
+            initStatus("Инициализация статуса")
+            initRepo("Инициализация репозитория")
                 operation("Удалить метку", AppCommand.TAG_DELETE) {
                     stubs("Обработка стабов") {
                         stubTagDeleteSuccess("Имитация успешной обработки")
